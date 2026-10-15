@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Local catalog and map layout, rebuilt from PAPERS_ROOT
+papers.db
+papers.db-shm
+papers.db-wal
+embed.json

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Papers</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect fill='%23f3efe6' width='16' height='16'/%3E%3Cpath fill='%231f3d34' d='M3 2h7l3 3v9H3z'/%3E%3Cpath fill='%23f3efe6' d='M10 2v3h3'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f3efe6;
+    --bg-raised: #faf7f2;
+    --sidebar: #e8e1d4;
+    --ink: #221e1a;
+    --muted: #6f675c;
+    --line: #d9d0c2;
+    --accent: #1f3d34;
+    --accent-ink: #f6f3ec;
+    --mark: #f0d48a;
+    --chip: #efe6d6;
+    --danger: #8c3a2f;
+    --shadow: 0 1px 0 rgba(34, 30, 26, 0.04);
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+  }
+  header {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: end;
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-raised);
+  }
+  .search-wrap { min-width: 0; }
+  .controls { flex: none; }
+  .brand h1 {
+    font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  .brand p {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .brand a { color: var(--accent); font-size: 13px; }
+  .search-wrap { position: relative; }
+  #q {
+    width: 100%;
+    font: 18px/1.3 "Iowan Old Style", Palatino, Georgia, serif;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: white;
+    color: var(--ink);
+    outline: none;
+  }
+  #q:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(31, 61, 52, 0.15); }
+  .controls { display: flex; gap: 8px; align-items: center; }
+  select, button, .ghost {
+    font: 13px/1 "Avenir Next", "Segoe UI", sans-serif;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--ink);
+    padding: 8px 10px;
+  }
+  button { cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  main {
+    display: grid;
+    grid-template-columns: 260px minmax(320px, 420px) 1fr;
+    min-height: 0;
+  }
+  aside, .results, .detail {
+    min-height: 0;
+    overflow: auto;
+  }
+  aside {
+    background: var(--sidebar);
+    border-right: 1px solid var(--line);
+    padding: 12px 10px 24px;
+  }
+  #tag-filter {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 7px 9px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
+    font: 13px/1.2 inherit;
+  }
+  .tag-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 4px 6px;
+    border-radius: 7px;
+    color: var(--ink);
+    cursor: pointer;
+    font: 13px/1.3 inherit;
+  }
+  .tag-row:hover { background: rgba(255, 255, 255, 0.55); }
+  .tag-row.active { background: var(--accent); color: var(--accent-ink); }
+  .tag-row.dim { opacity: 0.38; }
+  .tag-row .chev {
+    width: 14px;
+    flex: none;
+    color: inherit;
+    opacity: 0.7;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font: 11px/1 inherit;
+  }
+  .tag-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tag-count { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 11px; }
+  .tag-row.active .tag-count { color: #d5e4dc; }
+  .results { border-right: 1px solid var(--line); background: var(--bg); }
+  .results-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(243, 239, 230, 0.94);
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 999px;
+    padding: 3px 8px 3px 10px;
+    font-size: 12px;
+  }
+  .chip button {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    padding: 0 2px;
+    font-size: 14px;
+    line-height: 1;
+  }
+  .hit {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    padding: 12px 14px 11px;
+    cursor: pointer;
+    color: inherit;
+  }
+  .hit:hover { background: rgba(255, 255, 255, 0.45); }
+  .hit.selected { background: white; box-shadow: inset 3px 0 0 var(--accent); }
+  .hit-top { display: flex; gap: 8px; align-items: baseline; }
+  .ext {
+    flex: none;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    color: var(--accent);
+    border: 1px solid #c9ddd4;
+    background: #e7f0eb;
+    border-radius: 4px;
+    padding: 1px 4px;
+  }
+  .hit h2 {
+    font-family: "Iowan Old Style", Palatino, Georgia, serif;
+    font-size: 16.5px;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .hit .file, .meta-line { color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .crumbs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .crumb {
+    background: var(--chip);
+    border-radius: 999px;
+    padding: 1px 7px;
+    font-size: 11px;
+    color: #3d3832;
+  }
+  mark { background: var(--mark); color: inherit; padding: 0 1px; border-radius: 2px; }
+  .more {
+    display: block;
+    width: calc(100% - 24px);
+    margin: 12px;
+  }
+  .detail { background: var(--bg-raised); display: flex; flex-direction: column; min-width: 0; }
+  .detail-card { padding: 18px 20px 12px; border-bottom: 1px solid var(--line); }
+  .detail-card h2 {
+    font-family: "Iowan Old Style", Palatino, Georgia, serif;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0 0 8px;
+  }
+  .detail-card .file { color: var(--muted); font-size: 13px; word-break: break-all; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .actions .primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .path {
+    margin-top: 10px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    word-break: break-all;
+  }
+  #preview {
+    flex: 1;
+    border: 0;
+    width: 100%;
+    background: #d9d3c7;
+    min-height: 240px;
+  }
+  #text-preview {
+    flex: 1;
+    margin: 0;
+    padding: 16px 18px 32px;
+    overflow: auto;
+    white-space: pre-wrap;
+    font: 13px/1.45 ui-monospace, Menlo, monospace;
+    background: white;
+  }
+  .empty, .placeholder {
+    padding: 28px 18px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .detail .placeholder { padding: 32px 24px; }
+  .hidden { display: none !important; }
+  @media (max-width: 980px) {
+    header { grid-template-columns: 1fr; }
+    main { grid-template-columns: 1fr; grid-template-rows: 220px 280px 1fr; }
+    aside, .results { border-right: 0; border-bottom: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1>Papers</h1>
+    <p id="library-meta">Indexing the library…</p>
+    <p><a href="/map">Cluster map</a></p>
+  </div>
+  <div class="search-wrap">
+    <input id="q" type="search" placeholder="Search titles, filenames, and folders" autocomplete="off" autofocus>
+  </div>
+  <div class="controls">
+    <label class="ghost">Sort
+      <select id="sort">
+        <option value="rank">Relevance</option>
+        <option value="title">Title</option>
+        <option value="year">Year</option>
+        <option value="modified">Recently modified</option>
+      </select>
+    </label>
+  </div>
+</header>
+<main>
+  <aside>
+    <input id="tag-filter" type="search" placeholder="Filter folders" autocomplete="off">
+    <div id="tag-tree"></div>
+  </aside>
+  <section class="results" id="results">
+    <div class="results-bar" id="results-bar"></div>
+    <div id="hits"></div>
+  </section>
+  <section class="detail" id="detail">
+    <div class="placeholder">Select a paper to preview it. Folders are tags — choose one or several on the left.</div>
+  </section>
+</main>
+<script>
+const state = {
+  q: "",
+  tags: [],
+  sort: "rank",
+  offset: 0,
+  limit: 50,
+  total: 0,
+  papers: [],
+  catalog: [],
+  baseCounts: {},
+  facet: null,
+  expanded: new Set(),
+  tagQuery: "",
+  selectedId: null,
+  generation: 0,
+  indexedAt: null,
+  root: "",
+  libraryCount: 0,
+};
+
+const $ = (id) => document.getElementById(id);
+const hitsEl = $("hits");
+const treeEl = $("tag-tree");
+const detailEl = $("detail");
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[ch]));
+}
+
+function highlight(text, query) {
+  const words = [...new Set((query.match(/\w+/g) || []).filter((word) => word.length > 1))];
+  if (!words.length || !text) return escapeHtml(text || "");
+  const re = new RegExp(words.map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|"), "gi");
+  let html = "";
+  let last = 0;
+  for (const match of String(text).matchAll(re)) {
+    html += escapeHtml(text.slice(last, match.index));
+    html += "<mark>" + escapeHtml(match[0]) + "</mark>";
+    last = match.index + match[0].length;
+  }
+  html += escapeHtml(text.slice(last));
+  return html;
+}
+
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1048576) return (bytes / 1024).toFixed(bytes < 10240 ? 1 : 0) + " KB";
+  return (bytes / 1048576).toFixed(1) + " MB";
+}
+
+function formatDate(unix) {
+  return new Date(unix * 1000).toLocaleDateString(undefined, {
+    year: "numeric", month: "short", day: "numeric",
+  });
+}
+
+function extLabel(ext) {
+  return (ext || "").replace(".", "").toUpperCase() || "FILE";
+}
+
+function childMap() {
+  const map = new Map();
+  for (const tag of state.catalog) {
+    const key = tag.parent || "";
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(tag);
+  }
+  for (const list of map.values()) {
+    list.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
+  }
+  return map;
+}
+
+function countFor(path) {
+  if (state.facet) return state.facet[path] || 0;
+  return state.baseCounts[path] || 0;
+}
+
+function tagByPath(path) {
+  return state.catalog.find((tag) => tag.path === path);
+}
+
+function renderTags() {
+  const query = state.tagQuery.trim().toLowerCase();
+  const children = childMap();
+  const keep = new Set();
+  if (query) {
+    for (const tag of state.catalog) {
+      if (tag.name.toLowerCase().includes(query) || tag.path.toLowerCase().includes(query)) {
+        keep.add(tag.path);
+        let parent = tag.parent;
+        while (parent) {
+          keep.add(parent);
+          parent = tagByPath(parent)?.parent;
+        }
+      }
+    }
+  }
+  treeEl.textContent = "";
+  const walk = (parent, depth) => {
+    for (const tag of children.get(parent) || []) {
+      if (query && !keep.has(tag.path)) continue;
+      const kids = children.get(tag.path) || [];
+      const count = countFor(tag.path);
+      if (state.facet && count === 0 && !state.tags.includes(tag.path)) continue;
+      const row = document.createElement("div");
+      row.className = "tag-row";
+      if (state.tags.includes(tag.path)) row.classList.add("active");
+      if (state.facet && countFor(tag.path) === 0) row.classList.add("dim");
+      row.style.paddingLeft = (6 + depth * 14) + "px";
+      row.title = tag.path === "." ? "Papers sitting in the Papers folder itself" : tag.path;
+
+      const open = query || state.expanded.has(tag.path) || (state.facet && kids.some((kid) => countFor(kid.path) > 0));
+      const chev = document.createElement("span");
+      chev.className = "chev";
+      chev.textContent = kids.length ? (open ? "▾" : "▸") : "";
+      chev.addEventListener("click", (event) => {
+        event.stopPropagation();
+        if (!kids.length) return;
+        if (state.expanded.has(tag.path)) state.expanded.delete(tag.path);
+        else state.expanded.add(tag.path);
+        renderTags();
+      });
+
+      const name = document.createElement("span");
+      name.className = "tag-name";
+      name.textContent = tag.name;
+      const countLabel = document.createElement("span");
+      countLabel.className = "tag-count";
+      countLabel.textContent = String(count);
+
+      row.setAttribute("role", "button");
+      row.tabIndex = 0;
+      row.setAttribute("aria-pressed", state.tags.includes(tag.path) ? "true" : "false");
+      row.append(chev, name, countLabel);
+      row.addEventListener("click", () => toggleTag(tag.path));
+      row.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleTag(tag.path);
+        }
+      });
+      treeEl.append(row);
+      if (kids.length && open) walk(tag.path, depth + 1);
+    }
+  };
+  walk("", 0);
+}
+
+function renderBar() {
+  const bar = $("results-bar");
+  bar.textContent = "";
+  const label = document.createElement("span");
+  label.textContent = state.total.toLocaleString() + (state.total === 1 ? " paper" : " papers");
+  bar.append(label);
+  for (const path of state.tags) {
+    const tag = tagByPath(path);
+    const chip = document.createElement("span");
+    chip.className = "chip";
+    chip.append(tag ? tag.name : path);
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.textContent = "×";
+    remove.setAttribute("aria-label", "Remove " + (tag ? tag.name : path));
+    remove.addEventListener("click", () => toggleTag(path));
+    chip.append(remove);
+    bar.append(chip);
+  }
+}
+
+function renderHits(append) {
+  renderBar();
+  if (!append) hitsEl.textContent = "";
+  const existing = hitsEl.querySelector(".more");
+  if (existing) existing.remove();
+  const empty = hitsEl.querySelector(".empty");
+  if (empty) empty.remove();
+  if (!state.papers.length) {
+    const note = document.createElement("div");
+    note.className = "empty";
+    note.textContent = "No papers match. Try a filename, an author, or a folder.";
+    hitsEl.append(note);
+    return;
+  }
+  const start = append ? state.papers.length - append : 0;
+  for (const paper of state.papers.slice(start)) {
+    const button = document.createElement("button");
+    button.className = "hit" + (paper.id === state.selectedId ? " selected" : "");
+    button.type = "button";
+    button.dataset.id = String(paper.id);
+    const top = document.createElement("div");
+    top.className = "hit-top";
+    const badge = document.createElement("span");
+    badge.className = "ext";
+    badge.textContent = extLabel(paper.ext);
+    const heading = document.createElement("h2");
+    heading.innerHTML = highlight(paper.title, state.q);
+    top.append(badge, heading);
+    button.append(top);
+    const stem = paper.filename.replace(/\.[^.]+$/, "").replace(/_/g, " ");
+    if (stem.toLowerCase() !== paper.title.toLowerCase()) {
+      const file = document.createElement("div");
+      file.className = "file";
+      file.innerHTML = highlight(paper.filename, state.q);
+      button.append(file);
+    }
+    const meta = document.createElement("div");
+    meta.className = "meta-line";
+    const bits = [];
+    if (paper.year) bits.push(String(paper.year));
+    if (paper.pages) bits.push(paper.pages + " pp");
+    bits.push(formatSize(paper.size));
+    meta.textContent = bits.join(" · ");
+    button.append(meta);
+    const crumbs = document.createElement("div");
+    crumbs.className = "crumbs";
+    for (const tag of paper.tags) {
+      const crumb = document.createElement("span");
+      crumb.className = "crumb";
+      crumb.innerHTML = highlight(tag.name, state.q);
+      crumbs.append(crumb);
+    }
+    button.append(crumbs);
+    button.addEventListener("click", () => selectPaper(paper.id));
+    button.addEventListener("dblclick", () => openPaper(paper.id));
+    hitsEl.append(button);
+  }
+  if (state.papers.length < state.total) {
+    const more = document.createElement("button");
+    more.className = "more";
+    more.type = "button";
+    more.textContent = "Show more (" + state.papers.length + " of " + state.total + ")";
+    more.addEventListener("click", () => runSearch({ append: true }));
+    hitsEl.append(more);
+  }
+}
+
+function renderDetail(paper) {
+  detailEl.textContent = "";
+  if (!paper) {
+    const note = document.createElement("div");
+    note.className = "placeholder";
+    note.textContent = "Select a paper to preview it.";
+    detailEl.append(note);
+    return;
+  }
+  const card = document.createElement("div");
+  card.className = "detail-card";
+  const title = document.createElement("h2");
+  title.textContent = paper.title;
+  card.append(title);
+  const file = document.createElement("div");
+  file.className = "file";
+  file.textContent = paper.filename;
+  card.append(file);
+  const crumbs = document.createElement("div");
+  crumbs.className = "crumbs";
+  for (const tag of paper.tags) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "crumb";
+    button.textContent = tag.name;
+    button.addEventListener("click", () => {
+      if (!state.tags.includes(tag.path)) toggleTag(tag.path);
+    });
+    crumbs.append(button);
+  }
+  card.append(crumbs);
+  const meta = document.createElement("div");
+  meta.className = "meta-line";
+  const bits = [];
+  if (paper.year) bits.push(String(paper.year));
+  if (paper.pages) bits.push(paper.pages + " pages");
+  bits.push(formatSize(paper.size));
+  bits.push("Modified " + formatDate(paper.mtime));
+  meta.textContent = bits.join(" · ");
+  card.append(meta);
+  const actions = document.createElement("div");
+  actions.className = "actions";
+  const open = document.createElement("button");
+  open.className = "primary";
+  open.type = "button";
+  open.textContent = "Open";
+  open.addEventListener("click", () => openPaper(paper.id));
+  const reveal = document.createElement("button");
+  reveal.type = "button";
+  reveal.textContent = "Show in Finder";
+  reveal.addEventListener("click", () => revealPaper(paper.id));
+  const copy = document.createElement("button");
+  copy.type = "button";
+  copy.textContent = "Copy path";
+  copy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(paper.path);
+      copy.textContent = "Copied";
+      setTimeout(() => { copy.textContent = "Copy path"; }, 1200);
+    } catch (error) {
+      copy.textContent = "Copy failed";
+    }
+  });
+  actions.append(open, reveal, copy);
+  card.append(actions);
+  const path = document.createElement("div");
+  path.className = "path";
+  path.textContent = paper.path;
+  card.append(path);
+  detailEl.append(card);
+
+  if (paper.ext === ".txt") {
+    const pre = document.createElement("pre");
+    pre.id = "text-preview";
+    pre.textContent = "Loading…";
+    detailEl.append(pre);
+    fetch("/file/" + paper.id).then((response) => response.text()).then((text) => {
+      if (state.selectedId === paper.id) pre.textContent = text.slice(0, 200000);
+    }).catch(() => { pre.textContent = "Could not read this file."; });
+  } else if (paper.preview) {
+    const frame = document.createElement("iframe");
+    frame.id = "preview";
+    frame.title = paper.title;
+    frame.src = "/file/" + paper.id;
+    detailEl.append(frame);
+  } else {
+    const note = document.createElement("div");
+    note.className = "placeholder";
+    note.textContent = "Preview is available for PDF, HTML, and text. Use Open for this " + extLabel(paper.ext) + " file.";
+    detailEl.append(note);
+  }
+}
+
+function selectPaper(id) {
+  state.selectedId = id;
+  for (const node of hitsEl.querySelectorAll(".hit")) {
+    node.classList.toggle("selected", node.dataset.id === String(id));
+  }
+  renderDetail(state.papers.find((paper) => paper.id === id) || null);
+}
+
+async function openPaper(id) {
+  await fetch("/api/open/" + id, { method: "POST" });
+}
+
+async function revealPaper(id) {
+  await fetch("/api/reveal/" + id, { method: "POST" });
+}
+
+function toggleTag(path) {
+  if (state.tags.includes(path)) state.tags = state.tags.filter((item) => item !== path);
+  else state.tags = [...state.tags, path];
+  let parent = tagByPath(path)?.parent;
+  while (parent) {
+    state.expanded.add(parent);
+    parent = tagByPath(parent)?.parent;
+  }
+  runSearch();
+}
+
+async function runSearch({ append = false } = {}) {
+  const generation = append ? state.generation : ++state.generation;
+  if (!append) {
+    state.offset = 0;
+    state.selectedId = null;
+  } else {
+    state.offset = state.papers.length;
+  }
+  const params = new URLSearchParams();
+  params.set("q", state.q);
+  params.set("sort", state.sort);
+  params.set("offset", String(state.offset));
+  params.set("limit", String(state.limit));
+  for (const tag of state.tags) params.append("tag", tag);
+  const response = await fetch("/api/search?" + params);
+  const data = await response.json();
+  if (generation !== state.generation) return;
+  if (!response.ok) {
+    hitsEl.textContent = "";
+    const note = document.createElement("div");
+    note.className = "empty";
+    note.textContent = data.error || "Search failed.";
+    hitsEl.append(note);
+    return;
+  }
+  state.total = data.total;
+  state.facet = state.q.trim() || state.tags.length ? data.counts : null;
+  const added = data.papers.length;
+  state.papers = append ? state.papers.concat(data.papers) : data.papers;
+  renderHits(append ? added : 0);
+  renderTags();
+  if (!append) {
+    if (state.papers.length) selectPaper(state.papers[0].id);
+    else renderDetail(null);
+  }
+}
+
+function scheduleSearch() {
+  clearTimeout(scheduleSearch.timer);
+  scheduleSearch.timer = setTimeout(() => runSearch(), 140);
+}
+
+$("q").addEventListener("input", (event) => {
+  state.q = event.target.value;
+  scheduleSearch();
+});
+$("q").addEventListener("keydown", (event) => {
+  if (event.key === "Backspace" && state.q === "" && state.tags.length) {
+    state.tags = state.tags.slice(0, -1);
+    runSearch();
+  }
+});
+$("sort").addEventListener("change", (event) => {
+  state.sort = event.target.value;
+  runSearch();
+});
+$("tag-filter").addEventListener("input", (event) => {
+  state.tagQuery = event.target.value;
+  renderTags();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "/" && document.activeElement !== $("q") && document.activeElement !== $("tag-filter")) {
+    event.preventDefault();
+    $("q").focus();
+  }
+  if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+  if (document.activeElement === $("tag-filter")) return;
+  if (!state.papers.length) return;
+  event.preventDefault();
+  const index = state.papers.findIndex((paper) => paper.id === state.selectedId);
+  const next = event.key === "ArrowDown" ? Math.min(state.papers.length - 1, index + 1) : Math.max(0, index - 1);
+  selectPaper(state.papers[next].id);
+  hitsEl.querySelector(".hit.selected")?.scrollIntoView({ block: "nearest" });
+});
+
+async function boot() {
+  const meta = await fetch("/api/tags").then((response) => response.json());
+  state.catalog = meta.tags;
+  state.libraryCount = meta.papers;
+  state.indexedAt = meta.indexed_at;
+  state.root = meta.root;
+  for (const tag of meta.tags) state.baseCounts[tag.path] = tag.count;
+  const when = meta.indexed_at ? new Date(meta.indexed_at).toLocaleString() : "unknown";
+  $("library-meta").textContent = meta.papers.toLocaleString() + " documents · indexed " + when;
+  renderTags();
+  await runSearch();
+}
+
+boot().catch((error) => {
+  $("library-meta").textContent = "Could not load the catalog.";
+  console.error(error);
+});
+</script>
+</body>
+</html>

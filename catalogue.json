@@ -1,0 +1,11 @@
+{
+  "id": "paperdb",
+  "title": "Paperdb",
+  "oneLiner": "A searchable and mappable database of pdf library demo",
+  "demoUrl": "https://kylemath.github.io/paperdb",
+  "screenshot": "https://raw.githubusercontent.com/kylemath/paperdb/main/screenshot.png",
+  "kind": "project",
+  "categories": [],
+  "tags": [],
+  "status": "published"
+}

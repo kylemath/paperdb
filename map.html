@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Papers — cluster map</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect fill='%23f3efe6' width='16' height='16'/%3E%3Cpath fill='%231f3d34' d='M3 2h7l3 3v9H3z'/%3E%3Cpath fill='%23f3efe6' d='M10 2v3h3'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f3efe6;
+    --ink: #221e1a;
+    --muted: #6f675c;
+    --line: #d9d0c2;
+    --accent: #1f3d34;
+    --accent-ink: #f6f3ec;
+    --card: #faf7f2;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    overflow: hidden;
+  }
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    align-items: end;
+    padding: 12px 16px 10px;
+    border-bottom: 1px solid var(--line);
+    background: var(--card);
+  }
+  .brand h1 {
+    font-family: "Iowan Old Style", Palatino, Georgia, serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0;
+    letter-spacing: -0.03em;
+  }
+  .brand h1 a { color: inherit; text-decoration: none; }
+  .brand p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+  .brand a.back { color: var(--accent); }
+  label { font-size: 11px; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
+  select, input[type="search"], button {
+    font: 13px/1.2 "Avenir Next", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 8px;
+  }
+  button { cursor: pointer; }
+  button.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .pulls { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: end; }
+  .pulls label { min-width: 92px; }
+  .pulls input { width: 100%; accent-color: var(--accent); }
+  #q { width: 200px; }
+  #stage { position: relative; min-height: 0; }
+  canvas { display: block; width: 100%; height: 100%; cursor: grab; background: var(--bg); }
+  canvas.dragging { cursor: grabbing; }
+  #card {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: min(340px, calc(100% - 24px));
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 14px 12px;
+    box-shadow: 0 10px 30px rgba(34, 30, 26, 0.08);
+  }
+  #card h2 {
+    font-family: "Iowan Old Style", Palatino, Georgia, serif;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.25;
+    margin: 0 0 6px;
+  }
+  #card .meta { color: var(--muted); font-size: 12px; line-height: 1.45; white-space: pre-wrap; }
+  #card .actions { display: flex; gap: 8px; margin-top: 10px; }
+  #card .primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  #tip {
+    position: absolute;
+    pointer-events: none;
+    max-width: 280px;
+    background: #221e1a;
+    color: #f6f3ec;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    line-height: 1.35;
+    display: none;
+    z-index: 2;
+  }
+  #legend {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    max-width: min(560px, 50vw);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .swatch { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1><a href="/">Papers</a></h1>
+    <p><a class="back" href="/">List</a> · <span id="count">Loading the map…</span></p>
+  </div>
+  <div class="pulls" id="pulls">
+    <label>All fields<button type="button" id="all" class="active">t-SNE</button></label>
+    <label>Journal<input id="w-journal" type="range" min="0" max="100" value="0"></label>
+    <label>Year<input id="w-year" type="range" min="0" max="100" value="0"></label>
+    <label>Title<input id="w-title" type="range" min="0" max="100" value="0"></label>
+    <label>Folders<input id="w-folder" type="range" min="0" max="100" value="0"></label>
+    <label>Authors<input id="w-author" type="range" min="0" max="100" value="0"></label>
+  </div>
+  <label>Color
+    <select id="color">
+      <option value="folder" selected>Top folder</option>
+      <option value="journal">Journal</option>
+      <option value="year">Year</option>
+      <option value="author">Author</option>
+    </select>
+  </label>
+  <button type="button" id="fit">Fit</button>
+  <label>Find
+    <input id="q" type="search" placeholder="Title, author, journal, folder" autocomplete="off">
+  </label>
+</header>
+<div id="stage">
+  <canvas id="canvas"></canvas>
+  <div id="tip"></div>
+  <div id="legend"></div>
+  <aside id="card" class="hidden"></aside>
+</div>
+<script>
+const FIELDS = ["journal", "year", "title", "folder", "author"];
+const PALETTE = ["#1f3d34", "#9a3412", "#1d4e89", "#6b3fa0", "#3f6212", "#9f1239", "#0f766e", "#a16207", "#9d174d", "#0369a1", "#7c2d12", "#365314", "#4338ca", "#b45309", "#155e75"];
+const state = {
+  papers: [],
+  weights: { journal: 0, year: 0, title: 0, folder: 0, author: 0 },
+  color: "folder",
+  query: "",
+  hover: null,
+  selected: null,
+  zoom: 1,
+  panX: 0,
+  panY: 0,
+  userNavigated: false,
+  drag: null,
+};
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const tip = document.getElementById("tip");
+const card = document.getElementById("card");
+let dpr = 1;
+let colorCache = { map: new Map(), ranked: [] };
+
+function firstAuthor(paper) {
+  if (!paper.authors) return "";
+  return paper.authors.split(";")[0].trim();
+}
+function colorKey(paper) {
+  if (state.color === "journal") return paper.journal || "Unknown";
+  if (state.color === "year") return paper.year ? String(paper.year) : "Unknown";
+  if (state.color === "author") return firstAuthor(paper) || "Unknown";
+  return paper.folder || "Unfiled";
+}
+function matches(paper) {
+  const query = state.query.trim().toLowerCase();
+  if (!query) return true;
+  const hay = [paper.title, paper.authors, paper.journal, paper.folder, paper.filename, paper.tags.join(" ")].join("\n").toLowerCase();
+  return query.split(/\s+/).every((word) => hay.includes(word));
+}
+function retarget() {
+  const pull = FIELDS.reduce((sum, field) => sum + state.weights[field], 0);
+  const jointW = Math.max(0, 1 - pull);
+  const total = jointW + pull || 1;
+  for (const paper of state.papers) {
+    let x = paper.layouts.joint[0] * jointW;
+    let y = paper.layouts.joint[1] * jointW;
+    for (const field of FIELDS) {
+      const weight = state.weights[field];
+      x += paper.layouts[field][0] * weight;
+      y += paper.layouts[field][1] * weight;
+    }
+    paper.tx = x / total;
+    paper.ty = y / total;
+  }
+  let meanX = 0, meanY = 0;
+  for (const paper of state.papers) { meanX += paper.tx; meanY += paper.ty; }
+  meanX /= state.papers.length || 1;
+  meanY /= state.papers.length || 1;
+  let variance = 0;
+  for (const paper of state.papers) {
+    paper.tx -= meanX;
+    paper.ty -= meanY;
+    variance += paper.tx * paper.tx + paper.ty * paper.ty;
+  }
+  const scale = Math.sqrt(variance / (state.papers.length || 1)) || 1;
+  for (const paper of state.papers) {
+    paper.tx /= scale;
+    paper.ty /= scale;
+  }
+}
+function fit() {
+  if (!state.papers.length) return;
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  for (const paper of state.papers) {
+    minX = Math.min(minX, paper.tx);
+    maxX = Math.max(maxX, paper.tx);
+    minY = Math.min(minY, paper.ty);
+    maxY = Math.max(maxY, paper.ty);
+  }
+  const viewW = canvas.width / dpr;
+  const viewH = canvas.height / dpr;
+  const pad = 48;
+  state.zoom = Math.min((viewW - pad * 2) / Math.max(1e-3, maxX - minX), (viewH - pad * 2) / Math.max(1e-3, maxY - minY));
+  state.panX = viewW / 2 - ((minX + maxX) / 2) * state.zoom;
+  state.panY = viewH / 2 - ((minY + maxY) / 2) * state.zoom;
+}
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+  canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+  if (!state.userNavigated) fit();
+}
+function screenOf(paper) {
+  return { x: paper.x * state.zoom + state.panX, y: paper.y * state.zoom + state.panY };
+}
+function worldOf(sx, sy) {
+  return { x: (sx - state.panX) / state.zoom, y: (sy - state.panY) / state.zoom };
+}
+function colors() {
+  const counts = new Map();
+  for (const paper of state.papers) {
+    const key = colorKey(paper);
+    counts.set(key, (counts.get(key) || 0) + 1);
+  }
+  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  const map = new Map();
+  ranked.forEach(([key], index) => map.set(key, key === "Unknown" ? "#b7b1a6" : PALETTE[index % PALETTE.length]));
+  return { map, ranked };
+}
+function draw() {
+  for (const paper of state.papers) {
+    paper.x += (paper.tx - paper.x) * 0.12;
+    paper.y += (paper.ty - paper.y) * 0.12;
+  }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const viewW = canvas.width / dpr;
+  const viewH = canvas.height / dpr;
+  ctx.fillStyle = "#f3efe6";
+  ctx.fillRect(0, 0, viewW, viewH);
+  const radius = Math.max(1.5, Math.min(4.2, 0.22 * Math.sqrt(state.zoom)));
+  for (const paper of state.papers) {
+    const at = screenOf(paper);
+    if (at.x < -12 || at.y < -12 || at.x > viewW + 12 || at.y > viewH + 12) continue;
+    ctx.beginPath();
+    ctx.arc(at.x, at.y, paper === state.hover || paper === state.selected ? radius + 1.8 : radius, 0, Math.PI * 2);
+    ctx.fillStyle = colorCache.map.get(colorKey(paper)) || "#1f3d34";
+    ctx.globalAlpha = matches(paper) ? 0.9 : 0.07;
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  if (state.selected) {
+    const at = screenOf(state.selected);
+    ctx.beginPath();
+    ctx.arc(at.x, at.y, radius + 4, 0, Math.PI * 2);
+    ctx.strokeStyle = "#221e1a";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+  requestAnimationFrame(draw);
+}
+function hitTest(sx, sy) {
+  const world = worldOf(sx, sy);
+  const reach = 12 / state.zoom;
+  let best = null;
+  let bestD = reach * reach;
+  for (const paper of state.papers) {
+    const dx = paper.x - world.x;
+    const dy = paper.y - world.y;
+    const dist = dx * dx + dy * dy;
+    if (dist < bestD) { best = paper; bestD = dist; }
+  }
+  return best;
+}
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+}
+function showTip(paper, event) {
+  if (!paper || paper === state.selected) { tip.style.display = "none"; return; }
+  const bits = [];
+  if (paper.authors) bits.push(paper.authors.replaceAll(";", ", "));
+  if (paper.journal) bits.push(paper.journal);
+  if (paper.year) bits.push(String(paper.year));
+  bits.push(paper.tags.join(" / ") || "Unfiled");
+  tip.innerHTML = "<b>" + escapeHtml(paper.title) + "</b><br>" + escapeHtml(bits.join(" · "));
+  tip.style.display = "block";
+  const bounds = document.getElementById("stage").getBoundingClientRect();
+  tip.style.left = Math.min(event.clientX - bounds.left + 14, bounds.width - 300) + "px";
+  tip.style.top = Math.min(event.clientY - bounds.top + 14, bounds.height - 80) + "px";
+}
+function showCard(paper) {
+  card.classList.toggle("hidden", !paper);
+  if (!paper) { card.textContent = ""; return; }
+  card.innerHTML = "";
+  const title = document.createElement("h2");
+  title.textContent = paper.title;
+  const meta = document.createElement("div");
+  meta.className = "meta";
+  const lines = [];
+  if (paper.authors) lines.push(paper.authors.replaceAll(";", ", "));
+  const cite = [paper.journal, paper.year].filter(Boolean).join(" · ");
+  if (cite) lines.push(cite);
+  lines.push(paper.tags.join(" / ") || "Unfiled");
+  lines.push(paper.filename);
+  meta.textContent = lines.join("\n");
+  const actions = document.createElement("div");
+  actions.className = "actions";
+  const open = document.createElement("button");
+  open.className = "primary";
+  open.type = "button";
+  open.textContent = "Open";
+  open.addEventListener("click", () => fetch("/api/open/" + paper.id, { method: "POST" }));
+  const reveal = document.createElement("button");
+  reveal.type = "button";
+  reveal.textContent = "Show in Finder";
+  reveal.addEventListener("click", () => fetch("/api/reveal/" + paper.id, { method: "POST" }));
+  actions.append(open, reveal);
+  card.append(title, meta, actions);
+}
+function renderLegend() {
+  const legend = document.getElementById("legend");
+  legend.textContent = "";
+  for (const [key, count] of colorCache.ranked.slice(0, 8)) {
+    const item = document.createElement("span");
+    const swatch = document.createElement("i");
+    swatch.className = "swatch";
+    swatch.style.background = colorCache.map.get(key);
+    item.append(swatch, document.createTextNode(key + " " + count));
+    legend.append(item);
+  }
+  if (colorCache.ranked.length > 8) {
+    const more = document.createElement("span");
+    more.textContent = "+" + (colorCache.ranked.length - 8) + " more";
+    legend.append(more);
+  }
+}
+function setWeight(field, value) {
+  for (const name of FIELDS) state.weights[name] = name === field ? value : 0;
+  for (const name of FIELDS) document.getElementById("w-" + name).value = String(Math.round(state.weights[name] * 100));
+  document.getElementById("all").classList.toggle("active", FIELDS.every((name) => state.weights[name] === 0));
+  retarget();
+  if (!state.userNavigated) fit();
+}
+document.getElementById("all").addEventListener("click", () => setWeight("", 0));
+for (const field of FIELDS) {
+  document.getElementById("w-" + field).addEventListener("input", (event) => {
+    state.weights[field] = Number(event.target.value) / 100;
+    document.getElementById("all").classList.toggle("active", FIELDS.every((name) => state.weights[name] === 0));
+    retarget();
+    if (!state.userNavigated) fit();
+  });
+}
+document.getElementById("color").addEventListener("change", (event) => {
+  state.color = event.target.value;
+  colorCache = colors();
+  renderLegend();
+});
+document.getElementById("fit").addEventListener("click", () => { state.userNavigated = false; fit(); });
+document.getElementById("q").addEventListener("input", (event) => { state.query = event.target.value; });
+canvas.addEventListener("pointerdown", (event) => {
+  canvas.setPointerCapture(event.pointerId);
+  state.drag = { x: event.clientX, y: event.clientY, panX: state.panX, panY: state.panY, moved: false };
+  canvas.classList.add("dragging");
+});
+canvas.addEventListener("pointermove", (event) => {
+  const bounds = canvas.getBoundingClientRect();
+  const sx = event.clientX - bounds.left;
+  const sy = event.clientY - bounds.top;
+  if (state.drag) {
+    const dx = event.clientX - state.drag.x;
+    const dy = event.clientY - state.drag.y;
+    if (Math.hypot(dx, dy) > 3) state.drag.moved = true;
+    state.panX = state.drag.panX + dx;
+    state.panY = state.drag.panY + dy;
+    state.userNavigated = true;
+    return;
+  }
+  state.hover = hitTest(sx, sy);
+  showTip(state.hover, event);
+});
+canvas.addEventListener("pointerup", (event) => {
+  canvas.classList.remove("dragging");
+  const drag = state.drag;
+  state.drag = null;
+  if (drag && !drag.moved) {
+    const bounds = canvas.getBoundingClientRect();
+    state.selected = hitTest(event.clientX - bounds.left, event.clientY - bounds.top);
+    showCard(state.selected);
+  }
+});
+canvas.addEventListener("pointerleave", () => {
+  if (!state.drag) { state.hover = null; tip.style.display = "none"; }
+});
+canvas.addEventListener("dblclick", () => {
+  if (state.selected) fetch("/api/open/" + state.selected.id, { method: "POST" });
+});
+canvas.addEventListener("wheel", (event) => {
+  event.preventDefault();
+  const bounds = canvas.getBoundingClientRect();
+  const sx = event.clientX - bounds.left;
+  const sy = event.clientY - bounds.top;
+  const before = worldOf(sx, sy);
+  state.zoom = Math.min(80, Math.max(8, state.zoom * (event.deltaY < 0 ? 1.12 : 1 / 1.12)));
+  state.panX = sx - before.x * state.zoom;
+  state.panY = sy - before.y * state.zoom;
+  state.userNavigated = true;
+}, { passive: false });
+
+resize();
+window.addEventListener("resize", resize);
+requestAnimationFrame(draw);
+
+Promise.all([
+  fetch("/api/map").then((response) => response.json()),
+  fetch("/api/embed").then((response) => {
+    if (!response.ok) throw new Error("missing embedding");
+    return response.json();
+  }),
+]).then(([catalog, embed]) => {
+  const byId = new Map(embed.ids.map((id, index) => [id, index]));
+  state.papers = catalog.papers.filter((paper) => byId.has(paper.id)).map((paper) => {
+    const index = byId.get(paper.id);
+    const layouts = {};
+    for (const name of ["joint", ...FIELDS]) layouts[name] = embed.layouts[name][index];
+    return { ...paper, layouts, x: layouts.joint[0], y: layouts.joint[1], tx: layouts.joint[0], ty: layouts.joint[1] };
+  });
+  retarget();
+  for (const paper of state.papers) { paper.x = paper.tx; paper.y = paper.ty; }
+  colorCache = colors();
+  renderLegend();
+  fit();
+  document.getElementById("count").textContent = state.papers.length.toLocaleString() + " papers · 2D t-SNE";
+}).catch(() => {
+  document.getElementById("count").textContent = "Embedding is still building.";
+});
+</script>
+</body>
+</html>

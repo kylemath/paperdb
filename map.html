@@ -115,8 +115,8 @@
 <body>
 <header>
   <div class="brand">
-    <h1><a href="/">Papers</a></h1>
-    <p><a class="back" href="/">List</a> · <span id="count">Loading the map…</span></p>
+    <h1><a href="index.html">Papers</a></h1>
+    <p><a class="back" href="index.html">List</a> · <span id="count">Loading the map…</span></p>
   </div>
   <div class="pulls" id="pulls">
     <label>All fields<button type="button" id="all" class="active">t-SNE</button></label>
@@ -147,11 +147,15 @@
 </div>
 <script>
 const FIELDS = ["journal", "year", "title", "folder", "author"];
+function fileUrl(relpath) {
+  return String(relpath || "").split("/").map((part) => encodeURIComponent(part)).join("/");
+}
 const PALETTE = ["#1f3d34", "#9a3412", "#1d4e89", "#6b3fa0", "#3f6212", "#9f1239", "#0f766e", "#a16207", "#9d174d", "#0369a1", "#7c2d12", "#365314", "#4338ca", "#b45309", "#155e75"];
 const state = {
   papers: [],
   weights: { journal: 0, year: 0, title: 0, folder: 0, author: 0 },
   color: "folder",
+  staticMode: false,
   query: "",
   hover: null,
   selected: null,
@@ -336,12 +340,18 @@ function showCard(paper) {
   open.className = "primary";
   open.type = "button";
   open.textContent = "Open";
-  open.addEventListener("click", () => fetch("/api/open/" + paper.id, { method: "POST" }));
-  const reveal = document.createElement("button");
-  reveal.type = "button";
-  reveal.textContent = "Show in Finder";
-  reveal.addEventListener("click", () => fetch("/api/reveal/" + paper.id, { method: "POST" }));
-  actions.append(open, reveal);
+  open.addEventListener("click", () => {
+    if (state.staticMode && paper.href) window.open(fileUrl(paper.href), "_blank", "noopener");
+    else fetch("api/open/" + paper.id, { method: "POST" });
+  });
+  actions.append(open);
+  if (!state.staticMode) {
+    const reveal = document.createElement("button");
+    reveal.type = "button";
+    reveal.textContent = "Show in Finder";
+    reveal.addEventListener("click", () => fetch("api/reveal/" + paper.id, { method: "POST" }));
+    actions.append(reveal);
+  }
   card.append(title, meta, actions);
 }
 function renderLegend() {
@@ -419,7 +429,8 @@ canvas.addEventListener("pointerleave", () => {
   if (!state.drag) { state.hover = null; tip.style.display = "none"; }
 });
 canvas.addEventListener("dblclick", () => {
-  if (state.selected) fetch("/api/open/" + state.selected.id, { method: "POST" });
+  if (state.selected && state.staticMode && state.selected.href) window.open(fileUrl(state.selected.href), "_blank", "noopener");
+  else if (state.selected) fetch("api/open/" + state.selected.id, { method: "POST" });
 });
 canvas.addEventListener("wheel", (event) => {
   event.preventDefault();
@@ -437,29 +448,53 @@ resize();
 window.addEventListener("resize", resize);
 requestAnimationFrame(draw);
 
-Promise.all([
-  fetch("/api/map").then((response) => response.json()),
-  fetch("/api/embed").then((response) => {
-    if (!response.ok) throw new Error("missing embedding");
-    return response.json();
-  }),
-]).then(([catalog, embed]) => {
+function applyMap(catalog, embed, staticMode) {
+  state.staticMode = staticMode;
   const byId = new Map(embed.ids.map((id, index) => [id, index]));
   state.papers = catalog.papers.filter((paper) => byId.has(paper.id)).map((paper) => {
     const index = byId.get(paper.id);
     const layouts = {};
     for (const name of ["joint", ...FIELDS]) layouts[name] = embed.layouts[name][index];
-    return { ...paper, layouts, x: layouts.joint[0], y: layouts.joint[1], tx: layouts.joint[0], ty: layouts.joint[1] };
+    const tags = (paper.tags || [])
+      .filter((tag) => typeof tag === "string" || !tag.group)
+      .map((tag) => (typeof tag === "string" ? tag : tag.name));
+    return { ...paper, tags, layouts, x: layouts.joint[0], y: layouts.joint[1], tx: layouts.joint[0], ty: layouts.joint[1] };
   });
+  if (staticMode && new Set(state.papers.map((paper) => paper.folder || "Unfiled")).size < 2) {
+    state.color = "journal";
+    const color = document.getElementById("color");
+    if (color) color.value = "journal";
+  }
   retarget();
   for (const paper of state.papers) { paper.x = paper.tx; paper.y = paper.ty; }
   colorCache = colors();
   renderLegend();
   fit();
   document.getElementById("count").textContent = state.papers.length.toLocaleString() + " papers · 2D t-SNE";
-}).catch(() => {
-  document.getElementById("count").textContent = "Embedding is still building.";
-});
+}
+
+async function loadMap() {
+  try {
+    const catalogResponse = await fetch("api/map");
+    if (!catalogResponse.ok) throw new Error("no map api");
+    const embedResponse = await fetch("api/embed");
+    if (!embedResponse.ok) throw new Error("missing embedding");
+    applyMap(await catalogResponse.json(), await embedResponse.json(), false);
+  } catch (error) {
+    try {
+      const libraryResponse = await fetch("library.json");
+      if (!libraryResponse.ok) throw new Error("library.json missing");
+      const library = await libraryResponse.json();
+      if (!library.embed) throw new Error("missing embedding");
+      applyMap({ papers: library.papers }, library.embed, true);
+    } catch (staticError) {
+      document.getElementById("count").textContent = "Embedding is still building.";
+      console.error(error, staticError);
+    }
+  }
+}
+
+loadMap();
 </script>
 </body>
 </html>

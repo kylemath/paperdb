@@ -48,6 +48,18 @@ The map page is `http://127.0.0.1:8765/map`. It needs `embed.json`, built from f
 
 Index first. `embed.py` reads `papers.db` and does not re-scan the folder.
 
+## GitHub Pages
+
+`examplePapers/` is the public catalogue. `library.json` is the snapshot the site searches and maps when no local server is running, and the same file a homepage can fetch. It records title, authors, journal, year, page count, and the PDF path.
+
+Rebuild it after adding or renaming PDFs. This does not change `papers.db`.
+
+```bash
+.venv/bin/python embed.py --demo
+```
+
+Publish the repository with GitHub Pages from the `main` branch root. The demo is [kylemath.github.io/paperdb](https://kylemath.github.io/paperdb/). A file named `.nojekyll` is included so Pages serves the PDFs as they are.
+
 ## What is stored
 
 `papers.db` is the catalog. Authors, journal, and year are parsed from filenames; PDF titles and page counts come from Spotlight (`mdls`) on macOS. `embed.json` is the map layout. Both are local and listed in `.gitignore`.

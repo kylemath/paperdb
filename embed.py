@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -142,13 +143,23 @@ def align(source: np.ndarray, target: np.ndarray) -> np.ndarray:
     return aligned + target.mean(axis=0)
 
 
-def main() -> None:
-    payload = paperdb.map_data()
-    papers = payload["papers"]
+def folder_labels(paper: dict) -> list[str]:
+    if paper.get("map_tags"):
+        return [str(label) for label in paper["map_tags"] if label]
+    labels = []
+    for tag in paper.get("tags") or []:
+        if isinstance(tag, str):
+            labels.append(tag)
+        elif not tag.get("group"):
+            labels.append(tag["name"])
+    return labels or [paper.get("folder") or "Unfiled"]
+
+
+def build_embed(papers: list[dict]) -> dict:
     journals = [paper["journal"] or "Unknown" for paper in papers]
     years = [str(paper["year"]) if paper["year"] else "Unknown" for paper in papers]
     titles = [tokens(paper["title"]) for paper in papers]
-    folders = [paper["tags"] or ["Unfiled"] for paper in papers]
+    folders = [folder_labels(paper) for paper in papers]
     authors = [
         [name.strip() for name in paper["authors"].split(";") if name.strip()]
         if paper["authors"]
@@ -175,15 +186,31 @@ def main() -> None:
     }
     for name, block in blocks.items():
         print(f"t-SNE {name} {block.shape}", flush=True)
+        block = np.nan_to_num(block, nan=0.0, posinf=0.0, neginf=0.0)
+        # A constant field (one folder for the whole demo set) makes PCA inside t-SNE crash.
+        if block.shape[0] < 3 or float(np.std(block)) < 1e-8:
+            print(f"  {name} has no variation; keeping the joint layout", flush=True)
+            layouts[name] = layouts["joint"].copy()
+            continue
         layouts[name] = unstack(align(fit_tsne(block), layouts["joint"]), keys[name])
-    OUT.write_text(
-        json.dumps(
-            {
-                "ids": [paper["id"] for paper in papers],
-                "layouts": {name: np.round(points, 4).tolist() for name, points in layouts.items()},
-            }
-        )
-    )
+    return {
+        "ids": [paper["id"] for paper in papers],
+        "layouts": {name: np.round(points, 4).tolist() for name, points in layouts.items()},
+    }
+
+
+def main() -> None:
+    if "--demo" in sys.argv:
+        library = paperdb.demo_catalog()
+        library["embed"] = build_embed(library["papers"])
+        for paper in library["papers"]:
+            paper.pop("map_tags", None)
+        destination = HERE / "library.json"
+        destination.write_text(json.dumps(library, ensure_ascii=False, indent=2) + "\n")
+        print(f"Wrote {destination} ({library['count']} papers)", flush=True)
+        return
+    payload = paperdb.map_data()
+    OUT.write_text(json.dumps(build_embed(payload["papers"])))
     print(f"Wrote {OUT}", flush=True)
 
 

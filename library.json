@@ -1,0 +1,3238 @@
+{
+  "count": 43,
+  "indexed_at": "2026-10-15T05:55:00+00:00",
+  "source": "examplePapers",
+  "tags": [
+    {
+      "name": "Journal",
+      "path": "journal",
+      "parent": null,
+      "group": true,
+      "count": 43
+    },
+    {
+      "name": "Year",
+      "path": "year",
+      "parent": null,
+      "group": true,
+      "count": 43
+    },
+    {
+      "name": "2009",
+      "path": "year/2009",
+      "parent": "year",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "2010",
+      "path": "year/2010",
+      "parent": "year",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "2011",
+      "path": "year/2011",
+      "parent": "year",
+      "group": false,
+      "count": 3
+    },
+    {
+      "name": "2012",
+      "path": "year/2012",
+      "parent": "year",
+      "group": false,
+      "count": 3
+    },
+    {
+      "name": "2014",
+      "path": "year/2014",
+      "parent": "year",
+      "group": false,
+      "count": 4
+    },
+    {
+      "name": "2016",
+      "path": "year/2016",
+      "parent": "year",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "2017",
+      "path": "year/2017",
+      "parent": "year",
+      "group": false,
+      "count": 7
+    },
+    {
+      "name": "2018",
+      "path": "year/2018",
+      "parent": "year",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "2019",
+      "path": "year/2019",
+      "parent": "year",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "2020",
+      "path": "year/2020",
+      "parent": "year",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "2023",
+      "path": "year/2023",
+      "parent": "year",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "2024",
+      "path": "year/2024",
+      "parent": "year",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "Adv Healthc Mater",
+      "path": "journal/Adv Healthc Mater",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Bioengineering",
+      "path": "journal/Bioengineering",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Brain Res",
+      "path": "journal/Brain Res",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Cognition",
+      "path": "journal/Cognition",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Eur J Neurosci",
+      "path": "journal/Eur J Neurosci",
+      "parent": "journal",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "Front Pharmacol",
+      "path": "journal/Front Pharmacol",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Frontiers",
+      "path": "journal/Frontiers",
+      "parent": "journal",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "Hear Res",
+      "path": "journal/Hear Res",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "IEEE",
+      "path": "journal/IEEE",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "J Biomed Opt",
+      "path": "journal/J Biomed Opt",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "J Cogn Neurosci",
+      "path": "journal/J Cogn Neurosci",
+      "parent": "journal",
+      "group": false,
+      "count": 4
+    },
+    {
+      "name": "J Neurosci",
+      "path": "journal/J Neurosci",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "J Neurosci Methods",
+      "path": "journal/J Neurosci Methods",
+      "parent": "journal",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "J Sport Exerc Psychol",
+      "path": "journal/J Sport Exerc Psychol",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "J Stroke Cerebrovasc Dis",
+      "path": "journal/J Stroke Cerebrovasc Dis",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Nat Biomed Eng",
+      "path": "journal/Nat Biomed Eng",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Nat Commun",
+      "path": "journal/Nat Commun",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Perception",
+      "path": "journal/Perception",
+      "parent": "journal",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "PNAS",
+      "path": "journal/PNAS",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Psychol Sci",
+      "path": "journal/Psychol Sci",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Psychophysiology",
+      "path": "journal/Psychophysiology",
+      "parent": "journal",
+      "group": false,
+      "count": 10
+    },
+    {
+      "name": "SCAN",
+      "path": "journal/SCAN",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Sci Rep",
+      "path": "journal/Sci Rep",
+      "parent": "journal",
+      "group": false,
+      "count": 2
+    },
+    {
+      "name": "Science",
+      "path": "journal/Science",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Undated",
+      "path": "year/undated",
+      "parent": "year",
+      "group": false,
+      "count": 14
+    },
+    {
+      "name": "Unknown",
+      "path": "journal/Unknown",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    },
+    {
+      "name": "Vis Cogn",
+      "path": "journal/Vis Cogn",
+      "parent": "journal",
+      "group": false,
+      "count": 1
+    }
+  ],
+  "papers": [
+    {
+      "id": 1,
+      "filename": "1. Mathewson et al. JN 2009.pdf",
+      "title": "Mathewson et al. JN 2009",
+      "relpath": "examplePapers/1. Mathewson et al. JN 2009.pdf",
+      "path": "examplePapers/1. Mathewson et al. JN 2009.pdf",
+      "href": "examplePapers/1. Mathewson et al. JN 2009.pdf",
+      "ext": ".pdf",
+      "size": 368585,
+      "mtime": 1792043024.1553588,
+      "pages": 8,
+      "year": 2009,
+      "authors": "Mathewson",
+      "journal": "J Neurosci",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2009",
+          "path": "year/2009",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Neurosci",
+          "path": "journal/J Neurosci",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 2,
+      "filename": "10. Mathewson et al., JOCN, 2014 - OpticalAlpha.pdf",
+      "title": "Mathewson et al., JOCN, 2014 - OpticalAlpha",
+      "relpath": "examplePapers/10. Mathewson et al., JOCN, 2014 - OpticalAlpha.pdf",
+      "path": "examplePapers/10. Mathewson et al., JOCN, 2014 - OpticalAlpha.pdf",
+      "href": "examplePapers/10. Mathewson et al., JOCN, 2014 - OpticalAlpha.pdf",
+      "ext": ".pdf",
+      "size": 1095618,
+      "mtime": 1792043024.2025075,
+      "pages": 16,
+      "year": 2014,
+      "authors": "Mathewson",
+      "journal": "J Cogn Neurosci",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2014",
+          "path": "year/2014",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Cogn Neurosci",
+          "path": "journal/J Cogn Neurosci",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 3,
+      "filename": "11. Jang,Han,Xu,Mathewson,etal., NatComm, 2014 - Textile Electronics.pdf",
+      "title": "Rugged and breathable forms of stretchable electronics with adherent composite substrates for transcutaneous monitoring",
+      "relpath": "examplePapers/11. Jang,Han,Xu,Mathewson,etal., NatComm, 2014 - Textile Electronics.pdf",
+      "path": "examplePapers/11. Jang,Han,Xu,Mathewson,etal., NatComm, 2014 - Textile Electronics.pdf",
+      "href": "examplePapers/11. Jang,Han,Xu,Mathewson,etal., NatComm, 2014 - Textile Electronics.pdf",
+      "ext": ".pdf",
+      "size": 2399998,
+      "mtime": 1792043024.2070358,
+      "pages": 10,
+      "year": 2014,
+      "authors": "Jang; Han; Xu; Mathewson",
+      "journal": "Nat Commun",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2014",
+          "path": "year/2014",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Nat Commun",
+          "path": "journal/Nat Commun",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 4,
+      "filename": "12. Gaspar et al., PscyhScience, 2014.pdf",
+      "title": "Gaspar et al., PscyhScience, 2014",
+      "relpath": "examplePapers/12. Gaspar et al., PscyhScience, 2014.pdf",
+      "path": "examplePapers/12. Gaspar et al., PscyhScience, 2014.pdf",
+      "href": "examplePapers/12. Gaspar et al., PscyhScience, 2014.pdf",
+      "ext": ".pdf",
+      "size": 807724,
+      "mtime": 1792043024.2125704,
+      "pages": 12,
+      "year": 2014,
+      "authors": "Gaspar",
+      "journal": "Psychol Sci",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2014",
+          "path": "year/2014",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychol Sci",
+          "path": "journal/Psychol Sci",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 5,
+      "filename": "13. Xu,Zhang,Jia,Mathewson,etal., Science, 2014 - EEG Sensor System.pdf",
+      "title": "Xu,Zhang,Jia,Mathewson,etal., Science, 2014 - EEG Sensor System",
+      "relpath": "examplePapers/13. Xu,Zhang,Jia,Mathewson,etal., Science, 2014 - EEG Sensor System.pdf",
+      "path": "examplePapers/13. Xu,Zhang,Jia,Mathewson,etal., Science, 2014 - EEG Sensor System.pdf",
+      "href": "examplePapers/13. Xu,Zhang,Jia,Mathewson,etal., Science, 2014 - EEG Sensor System.pdf",
+      "ext": ".pdf",
+      "size": 2881506,
+      "mtime": 1792043024.215725,
+      "pages": 6,
+      "year": 2014,
+      "authors": "Xu; Zhang; Jia; Mathewson",
+      "journal": "Science",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2014",
+          "path": "year/2014",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Science",
+          "path": "journal/Science",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 6,
+      "filename": "14. Chiarelli et al., JBO, 2016 - Depth reconstruction algorithm.pdf",
+      "title": "Chiarelli et al., JBO, 2016 - Depth reconstruction algorithm",
+      "relpath": "examplePapers/14. Chiarelli et al., JBO, 2016 - Depth reconstruction algorithm.pdf",
+      "path": "examplePapers/14. Chiarelli et al., JBO, 2016 - Depth reconstruction algorithm.pdf",
+      "href": "examplePapers/14. Chiarelli et al., JBO, 2016 - Depth reconstruction algorithm.pdf",
+      "ext": ".pdf",
+      "size": 5415779,
+      "mtime": 1792043024.2233853,
+      "pages": 18,
+      "year": 2016,
+      "authors": "Chiarelli",
+      "journal": "J Biomed Opt",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2016",
+          "path": "year/2016",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Biomed Opt",
+          "path": "journal/J Biomed Opt",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 7,
+      "filename": "15. Mathewson,Harrison,Kizuk-2017-Psychophysiology.pdf",
+      "title": "High and dry? Comparing active dry EEG electrodes to active and passive wet electrodes",
+      "relpath": "examplePapers/15. Mathewson,Harrison,Kizuk-2017-Psychophysiology.pdf",
+      "path": "examplePapers/15. Mathewson,Harrison,Kizuk-2017-Psychophysiology.pdf",
+      "href": "examplePapers/15. Mathewson,Harrison,Kizuk-2017-Psychophysiology.pdf",
+      "ext": ".pdf",
+      "size": 517036,
+      "mtime": 1792043024.2298722,
+      "pages": 9,
+      "year": 2017,
+      "authors": "Mathewson; Harrison; Kizuk",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2017",
+          "path": "year/2017",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 8,
+      "filename": "16. Kuziek,Shienh,Mathewson, JNMeth, 2017 - Pi2.pdf",
+      "title": "Transitioning EEG experiments away from the laboratory using a Raspberry Pi 2",
+      "relpath": "examplePapers/16. Kuziek,Shienh,Mathewson, JNMeth, 2017 - Pi2.pdf",
+      "path": "examplePapers/16. Kuziek,Shienh,Mathewson, JNMeth, 2017 - Pi2.pdf",
+      "href": "examplePapers/16. Kuziek,Shienh,Mathewson, JNMeth, 2017 - Pi2.pdf",
+      "ext": ".pdf",
+      "size": 1723508,
+      "mtime": 1792043024.2337642,
+      "pages": 8,
+      "year": 2017,
+      "authors": "Kuziek; Shienh; Mathewson",
+      "journal": "J Neurosci Methods",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2017",
+          "path": "year/2017",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Neurosci Methods",
+          "path": "journal/J Neurosci Methods",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 9,
+      "filename": "17. Seymour et al., Hearing Res, 2016 - Deaf Optical Imaging.pdf",
+      "title": "Reorganization of neural systems mediating peripheral visual selective attention in the deaf: An optical imaging study",
+      "relpath": "examplePapers/17. Seymour et al., Hearing Res, 2016 - Deaf Optical Imaging.pdf",
+      "path": "examplePapers/17. Seymour et al., Hearing Res, 2016 - Deaf Optical Imaging.pdf",
+      "href": "examplePapers/17. Seymour et al., Hearing Res, 2016 - Deaf Optical Imaging.pdf",
+      "ext": ".pdf",
+      "size": 2079112,
+      "mtime": 1792043024.2381306,
+      "pages": 48,
+      "year": 2016,
+      "authors": "Seymour",
+      "journal": "Hear Res",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2016",
+          "path": "year/2016",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Hear Res",
+          "path": "journal/Hear Res",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 10,
+      "filename": "18. MetzgerMathewson et al, JOCN, 2017.pdf",
+      "title": "MetzgerMathewson et al, JOCN, 2017",
+      "relpath": "examplePapers/18. MetzgerMathewson et al, JOCN, 2017.pdf",
+      "path": "examplePapers/18. MetzgerMathewson et al, JOCN, 2017.pdf",
+      "href": "examplePapers/18. MetzgerMathewson et al, JOCN, 2017.pdf",
+      "ext": ".pdf",
+      "size": 1085734,
+      "mtime": 1792043024.2411306,
+      "pages": 14,
+      "year": 2017,
+      "authors": "MetzgerMathewson",
+      "journal": "J Cogn Neurosci",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2017",
+          "path": "year/2017",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Cogn Neurosci",
+          "path": "journal/J Cogn Neurosci",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 11,
+      "filename": "19. Kizuk_Mathewson_2017_JOCN_Entrainment.pdf",
+      "title": "Kizuk Mathewson 2017 JOCN Entrainment",
+      "relpath": "examplePapers/19. Kizuk_Mathewson_2017_JOCN_Entrainment.pdf",
+      "path": "examplePapers/19. Kizuk_Mathewson_2017_JOCN_Entrainment.pdf",
+      "href": "examplePapers/19. Kizuk_Mathewson_2017_JOCN_Entrainment.pdf",
+      "ext": ".pdf",
+      "size": 1224683,
+      "mtime": 1792043024.24644,
+      "pages": 15,
+      "year": 2017,
+      "authors": "Kizuk; Mathewson",
+      "journal": "J Cogn Neurosci",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2017",
+          "path": "year/2017",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Cogn Neurosci",
+          "path": "journal/J Cogn Neurosci",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 12,
+      "filename": "2. Mathewson et al. 2010, Visual Cognition, OPAM.PDF",
+      "title": "Mathewson et al. 2010, Visual Cognition, OPAM",
+      "relpath": "examplePapers/2. Mathewson et al. 2010, Visual Cognition, OPAM.PDF",
+      "path": "examplePapers/2. Mathewson et al. 2010, Visual Cognition, OPAM.PDF",
+      "href": "examplePapers/2. Mathewson et al. 2010, Visual Cognition, OPAM.PDF",
+      "ext": ".pdf",
+      "size": 1027626,
+      "mtime": 1792043024.159469,
+      "pages": 51,
+      "year": 2010,
+      "authors": "Mathewson",
+      "journal": "Vis Cogn",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2010",
+          "path": "year/2010",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Vis Cogn",
+          "path": "journal/Vis Cogn",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 13,
+      "filename": "20. Scanlon_et_al-2017-Psychophysiology.pdf",
+      "title": "Your brain on bikes: P3, MMN/N2b, and baseline noise while pedaling a stationary bike",
+      "relpath": "examplePapers/20. Scanlon_et_al-2017-Psychophysiology.pdf",
+      "path": "examplePapers/20. Scanlon_et_al-2017-Psychophysiology.pdf",
+      "href": "examplePapers/20. Scanlon_et_al-2017-Psychophysiology.pdf",
+      "ext": ".pdf",
+      "size": 832287,
+      "mtime": 1792043024.2499676,
+      "pages": 11,
+      "year": 2017,
+      "authors": "Scanlon",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2017",
+          "path": "year/2017",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 14,
+      "filename": "21. Madan et al., 2017, Psychophys - WebcamHR - acceptedpreprint.pdf",
+      "title": "Non-contact measurement of emotional and physiological changes in heart rate from a webcam",
+      "relpath": "examplePapers/21. Madan et al., 2017, Psychophys - WebcamHR - acceptedpreprint.pdf",
+      "path": "examplePapers/21. Madan et al., 2017, Psychophys - WebcamHR - acceptedpreprint.pdf",
+      "href": "examplePapers/21. Madan et al., 2017, Psychophys - WebcamHR - acceptedpreprint.pdf",
+      "ext": ".pdf",
+      "size": 1507388,
+      "mtime": 1792043024.2550988,
+      "pages": 28,
+      "year": 2017,
+      "authors": "Madan",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2017",
+          "path": "year/2017",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 15,
+      "filename": "21. Madan et al., 2017, Psychophys - WebcamHR.pdf",
+      "title": "Noncontact measurement of emotional and physiological changes in heart rate from a webcam",
+      "relpath": "examplePapers/21. Madan et al., 2017, Psychophys - WebcamHR.pdf",
+      "path": "examplePapers/21. Madan et al., 2017, Psychophys - WebcamHR.pdf",
+      "href": "examplePapers/21. Madan et al., 2017, Psychophys - WebcamHR.pdf",
+      "ext": ".pdf",
+      "size": 801422,
+      "mtime": 1792043024.2590373,
+      "pages": 12,
+      "year": 2017,
+      "authors": "Madan",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2017",
+          "path": "year/2017",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 16,
+      "filename": "22. Scanlon et al., in press, Brain Research- BikeOut.pdf",
+      "title": "Scanlon et al., in press, Brain Research- BikeOut",
+      "relpath": "examplePapers/22. Scanlon et al., in press, Brain Research- BikeOut.pdf",
+      "path": "examplePapers/22. Scanlon et al., in press, Brain Research- BikeOut.pdf",
+      "href": "examplePapers/22. Scanlon et al., in press, Brain Research- BikeOut.pdf",
+      "ext": ".pdf",
+      "size": 2576936,
+      "mtime": 1792043024.2639475,
+      "pages": 12,
+      "year": null,
+      "authors": "Scanlon",
+      "journal": "Brain Res",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Brain Res",
+          "path": "journal/Brain Res",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 17,
+      "filename": "23. Mathewson,2018,Perception.pdf",
+      "title": "Duck Eats Rabbit: Exactly Which Type of Relational Phrase Can Disambiguate the Perception of Identical Side by Side Ambiguous Figures?",
+      "relpath": "examplePapers/23. Mathewson,2018,Perception.pdf",
+      "path": "examplePapers/23. Mathewson,2018,Perception.pdf",
+      "href": "examplePapers/23. Mathewson,2018,Perception.pdf",
+      "ext": ".pdf",
+      "size": 219288,
+      "mtime": 1792043024.2670932,
+      "pages": 4,
+      "year": 2018,
+      "authors": "Mathewson",
+      "journal": "Perception",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2018",
+          "path": "year/2018",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Perception",
+          "path": "journal/Perception",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 18,
+      "filename": "24. Sheldon&Mathewson, in press, Frontiers,tACS.pdf",
+      "title": "Does 10-Hz Cathodal Oscillating Current of the Parieto-Occipital Lobe Modulate Target Detection?",
+      "relpath": "examplePapers/24. Sheldon&Mathewson, in press, Frontiers,tACS.pdf",
+      "path": "examplePapers/24. Sheldon&Mathewson, in press, Frontiers,tACS.pdf",
+      "href": "examplePapers/24. Sheldon&Mathewson, in press, Frontiers,tACS.pdf",
+      "ext": ".pdf",
+      "size": 1704805,
+      "mtime": 1792043024.2717571,
+      "pages": 13,
+      "year": null,
+      "authors": "Sheldon; Mathewson",
+      "journal": "Frontiers",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Frontiers",
+          "path": "journal/Frontiers",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 19,
+      "filename": "25. Bertrand et al, underReview, ScientificRep.pdf",
+      "title": "Entrainment of theta, not alpha, oscillations is predictive of the brightness enhancement of a flickering stimulus",
+      "relpath": "examplePapers/25. Bertrand et al, underReview, ScientificRep.pdf",
+      "path": "examplePapers/25. Bertrand et al, underReview, ScientificRep.pdf",
+      "href": "examplePapers/25. Bertrand et al, underReview, ScientificRep.pdf",
+      "ext": ".pdf",
+      "size": 820706,
+      "mtime": 1792043024.2746403,
+      "pages": 29,
+      "year": null,
+      "authors": "Bertrand",
+      "journal": "Sci Rep",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Sci Rep",
+          "path": "journal/Sci Rep",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 20,
+      "filename": "26. Kuziek et al., underReview, JNeurosciMethods.pdf",
+      "title": "Increasing the Mobility of EEG Data Collection Using a Latte Panda Computer",
+      "relpath": "examplePapers/26. Kuziek et al., underReview, JNeurosciMethods.pdf",
+      "path": "examplePapers/26. Kuziek et al., underReview, JNeurosciMethods.pdf",
+      "href": "examplePapers/26. Kuziek et al., underReview, JNeurosciMethods.pdf",
+      "ext": ".pdf",
+      "size": 1349972,
+      "mtime": 1792043024.2793272,
+      "pages": 33,
+      "year": null,
+      "authors": "Kuziek",
+      "journal": "J Neurosci Methods",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Neurosci Methods",
+          "path": "journal/J Neurosci Methods",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 21,
+      "filename": "27. La et al., AdvHealthMat, 2018 - Fabric EEG.pdf",
+      "title": "Two‐Layered and Stretchable e‐Textile Patches for Wearable Healthcare Electronics",
+      "relpath": "examplePapers/27. La et al., AdvHealthMat, 2018 - Fabric EEG.pdf",
+      "path": "examplePapers/27. La et al., AdvHealthMat, 2018 - Fabric EEG.pdf",
+      "href": "examplePapers/27. La et al., AdvHealthMat, 2018 - Fabric EEG.pdf",
+      "ext": ".pdf",
+      "size": 4217570,
+      "mtime": 1792043024.2835543,
+      "pages": 11,
+      "year": 2018,
+      "authors": "La",
+      "journal": "Adv Healthc Mater",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2018",
+          "path": "year/2018",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Adv Healthc Mater",
+          "path": "journal/Adv Healthc Mater",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 22,
+      "filename": "28. Tian et al., Accepted, NatBioEng.pdf",
+      "title": "Large-area MRI-compatible epidermal electronic interfaces for prosthetic control and cognitive monitoring",
+      "relpath": "examplePapers/28. Tian et al., Accepted, NatBioEng.pdf",
+      "path": "examplePapers/28. Tian et al., Accepted, NatBioEng.pdf",
+      "href": "examplePapers/28. Tian et al., Accepted, NatBioEng.pdf",
+      "ext": ".pdf",
+      "size": 4434936,
+      "mtime": 1792043024.2899792,
+      "pages": 16,
+      "year": null,
+      "authors": "Tian",
+      "journal": "Nat Biomed Eng",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Nat Biomed Eng",
+          "path": "journal/Nat Biomed Eng",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 23,
+      "filename": "29. Kizuk, Vuong et al., in print, Psychophysiology - RestingO2.pdf",
+      "title": "Electrophysiological correlates of hyperoxia during resting‐state EEG in awake human subjects",
+      "relpath": "examplePapers/29. Kizuk, Vuong et al., in print, Psychophysiology - RestingO2.pdf",
+      "path": "examplePapers/29. Kizuk, Vuong et al., in print, Psychophysiology - RestingO2.pdf",
+      "href": "examplePapers/29. Kizuk, Vuong et al., in print, Psychophysiology - RestingO2.pdf",
+      "ext": ".pdf",
+      "size": 1516456,
+      "mtime": 1792043024.2938678,
+      "pages": 14,
+      "year": null,
+      "authors": "Kizuk; Vuong",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 24,
+      "filename": "3. Mathewson et al., Cognition, 2010.PDF",
+      "title": "Rescuing stimuli from invisibility: Inducing a momentary release from visual masking with pre-target entrainment",
+      "relpath": "examplePapers/3. Mathewson et al., Cognition, 2010.PDF",
+      "path": "examplePapers/3. Mathewson et al., Cognition, 2010.PDF",
+      "href": "examplePapers/3. Mathewson et al., Cognition, 2010.PDF",
+      "ext": ".pdf",
+      "size": 335539,
+      "mtime": 1792043024.164632,
+      "pages": 6,
+      "year": 2010,
+      "authors": "Mathewson",
+      "journal": "Cognition",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2010",
+          "path": "year/2010",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Cognition",
+          "path": "journal/Cognition",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 25,
+      "filename": "30. Scalon et al., Accepted, Psychophysiology - AuditoryP2.pdf",
+      "title": "The ecological cocktail party: Measuring brain activity during an auditory oddball task with background noise",
+      "relpath": "examplePapers/30. Scalon et al., Accepted, Psychophysiology - AuditoryP2.pdf",
+      "path": "examplePapers/30. Scalon et al., Accepted, Psychophysiology - AuditoryP2.pdf",
+      "href": "examplePapers/30. Scalon et al., Accepted, Psychophysiology - AuditoryP2.pdf",
+      "ext": ".pdf",
+      "size": 1730731,
+      "mtime": 1792043024.297462,
+      "pages": 38,
+      "year": null,
+      "authors": "Scalon",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 26,
+      "filename": "31. The_Human_Eye_as_a_Camera__IEEE_Healthcom_2019_.pdf",
+      "title": "The Human Eye as a Camera",
+      "relpath": "examplePapers/31. The_Human_Eye_as_a_Camera__IEEE_Healthcom_2019_.pdf",
+      "path": "examplePapers/31. The_Human_Eye_as_a_Camera__IEEE_Healthcom_2019_.pdf",
+      "href": "examplePapers/31. The_Human_Eye_as_a_Camera__IEEE_Healthcom_2019_.pdf",
+      "ext": ".pdf",
+      "size": 7034287,
+      "mtime": 1792043024.304703,
+      "pages": 8,
+      "year": 2019,
+      "authors": "",
+      "journal": "IEEE",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2019",
+          "path": "year/2019",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "IEEE",
+          "path": "journal/IEEE",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 27,
+      "filename": "32. Scanlon et al., BikePark.pdf",
+      "title": "Scanlon et al., BikePark",
+      "relpath": "examplePapers/32. Scanlon et al., BikePark.pdf",
+      "path": "examplePapers/32. Scanlon et al., BikePark.pdf",
+      "href": "examplePapers/32. Scanlon et al., BikePark.pdf",
+      "ext": ".pdf",
+      "size": 1821320,
+      "mtime": 1792043024.310834,
+      "pages": 44,
+      "year": null,
+      "authors": "Scanlon; BikePark",
+      "journal": "",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Unknown",
+          "path": "journal/Unknown",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 28,
+      "filename": "33. Gantman et al., SCAN, 2020, MoralWord_.pdf",
+      "title": "Gantman et al., SCAN, 2020, MoralWord",
+      "relpath": "examplePapers/33. Gantman et al., SCAN, 2020, MoralWord_.pdf",
+      "path": "examplePapers/33. Gantman et al., SCAN, 2020, MoralWord_.pdf",
+      "href": "examplePapers/33. Gantman et al., SCAN, 2020, MoralWord_.pdf",
+      "ext": ".pdf",
+      "size": 672906,
+      "mtime": 1792043024.313559,
+      "pages": 12,
+      "year": 2020,
+      "authors": "Gantman",
+      "journal": "SCAN",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2020",
+          "path": "year/2020",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "SCAN",
+          "path": "journal/SCAN",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 29,
+      "filename": "34. Chandler et al, JSEP, Exercise Hippocampus.pdf",
+      "title": "Chandler et al, JSEP, Exercise Hippocampus",
+      "relpath": "examplePapers/34. Chandler et al, JSEP, Exercise Hippocampus.pdf",
+      "path": "examplePapers/34. Chandler et al, JSEP, Exercise Hippocampus.pdf",
+      "href": "examplePapers/34. Chandler et al, JSEP, Exercise Hippocampus.pdf",
+      "ext": ".pdf",
+      "size": 2684417,
+      "mtime": 1792043024.316972,
+      "pages": 8,
+      "year": null,
+      "authors": "Chandler",
+      "journal": "J Sport Exerc Psychol",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Sport Exerc Psychol",
+          "path": "journal/J Sport Exerc Psychol",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 30,
+      "filename": "35. Wilkinson et al., Sci Reports, - Muse Stroke.pdf",
+      "title": "Predicting stroke severity with a 3-min recording from the Muse portable EEG system for rapid diagnosis of stroke",
+      "relpath": "examplePapers/35. Wilkinson et al., Sci Reports, - Muse Stroke.pdf",
+      "path": "examplePapers/35. Wilkinson et al., Sci Reports, - Muse Stroke.pdf",
+      "href": "examplePapers/35. Wilkinson et al., Sci Reports, - Muse Stroke.pdf",
+      "ext": ".pdf",
+      "size": 3306090,
+      "mtime": 1792043024.3226168,
+      "pages": 11,
+      "year": null,
+      "authors": "Wilkinson",
+      "journal": "Sci Rep",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Sci Rep",
+          "path": "journal/Sci Rep",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 31,
+      "filename": "36. Robles et al., EJN, Skateboard EEG.pdf",
+      "title": "EEG in motion: Using an oddball task to explore motor interference in active skateboarding",
+      "relpath": "examplePapers/36. Robles et al., EJN, Skateboard EEG.pdf",
+      "path": "examplePapers/36. Robles et al., EJN, Skateboard EEG.pdf",
+      "href": "examplePapers/36. Robles et al., EJN, Skateboard EEG.pdf",
+      "ext": ".pdf",
+      "size": 1789691,
+      "mtime": 1792043024.3296168,
+      "pages": 18,
+      "year": null,
+      "authors": "Robles",
+      "journal": "Eur J Neurosci",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Eur J Neurosci",
+          "path": "journal/Eur J Neurosci",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 32,
+      "filename": "37. Sheldon et al., EJN, OrientationWheel.pdf",
+      "title": "To see, not to see or to see poorly: Perceptual quality and guess rate as a function of electroencephalography (EEG) brain activity in an orientation perception task",
+      "relpath": "examplePapers/37. Sheldon et al., EJN, OrientationWheel.pdf",
+      "path": "examplePapers/37. Sheldon et al., EJN, OrientationWheel.pdf",
+      "href": "examplePapers/37. Sheldon et al., EJN, OrientationWheel.pdf",
+      "ext": ".pdf",
+      "size": 7612190,
+      "mtime": 1792043024.3348815,
+      "pages": 25,
+      "year": null,
+      "authors": "Sheldon",
+      "journal": "Eur J Neurosci",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Eur J Neurosci",
+          "path": "journal/Eur J Neurosci",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 33,
+      "filename": "38. Maayah et al., FrontPharmaco, Cannabis metabolics.pdf",
+      "title": "Maayah et al., FrontPharmaco, Cannabis metabolics",
+      "relpath": "examplePapers/38. Maayah et al., FrontPharmaco, Cannabis metabolics.pdf",
+      "path": "examplePapers/38. Maayah et al., FrontPharmaco, Cannabis metabolics.pdf",
+      "href": "examplePapers/38. Maayah et al., FrontPharmaco, Cannabis metabolics.pdf",
+      "ext": ".pdf",
+      "size": 2178144,
+      "mtime": 1792043024.3410907,
+      "pages": 11,
+      "year": null,
+      "authors": "Maayah",
+      "journal": "Front Pharmacol",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Front Pharmacol",
+          "path": "journal/Front Pharmacol",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 34,
+      "filename": "39. Keil et al., Psychophysiology, TF Guidelines.pdf",
+      "title": "Recommendations and publication guidelines for studies using frequency domain and time‐frequency domain analyses of neural time series",
+      "relpath": "examplePapers/39. Keil et al., Psychophysiology, TF Guidelines.pdf",
+      "path": "examplePapers/39. Keil et al., Psychophysiology, TF Guidelines.pdf",
+      "href": "examplePapers/39. Keil et al., Psychophysiology, TF Guidelines.pdf",
+      "ext": ".pdf",
+      "size": 1765161,
+      "mtime": 1792043024.3457484,
+      "pages": 37,
+      "year": null,
+      "authors": "Keil",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Undated",
+          "path": "year/undated",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 35,
+      "filename": "4. Maclin, Mathewson et al, Psychophys, 2011.pdf",
+      "title": "Learning to multitask: Effects of video game practice on electrophysiological indices of attention and resource allocation",
+      "relpath": "examplePapers/4. Maclin, Mathewson et al, Psychophys, 2011.pdf",
+      "path": "examplePapers/4. Maclin, Mathewson et al, Psychophys, 2011.pdf",
+      "href": "examplePapers/4. Maclin, Mathewson et al, Psychophys, 2011.pdf",
+      "ext": ".pdf",
+      "size": 1410706,
+      "mtime": 1792043024.1706486,
+      "pages": 11,
+      "year": 2011,
+      "authors": "Maclin; Mathewson",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2011",
+          "path": "year/2011",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 36,
+      "filename": "40. Perpetuini, Gunal, et al., 2023, Bioengineering MDPI, - FOS real time retinotopy and BCI.pdf",
+      "title": "Fast Optical Signals for Real-Time Retinotopy and Brain Computer Interface",
+      "relpath": "examplePapers/40. Perpetuini, Gunal, et al., 2023, Bioengineering MDPI, - FOS real time retinotopy and BCI.pdf",
+      "path": "examplePapers/40. Perpetuini, Gunal, et al., 2023, Bioengineering MDPI, - FOS real time retinotopy and BCI.pdf",
+      "href": "examplePapers/40. Perpetuini, Gunal, et al., 2023, Bioengineering MDPI, - FOS real time retinotopy and BCI.pdf",
+      "ext": ".pdf",
+      "size": 2270409,
+      "mtime": 1792043024.3496063,
+      "pages": 14,
+      "year": 2023,
+      "authors": "Perpetuini; Gunal",
+      "journal": "Bioengineering",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2023",
+          "path": "year/2023",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Bioengineering",
+          "path": "journal/Bioengineering",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 37,
+      "filename": "41. Mathewson et al., 2024, Psychophysiology, The moving wave  Applications of the mobile EEG approach to study human attention.pdf",
+      "title": "The moving wave: Applications of the mobile EEG approach to study human attention",
+      "relpath": "examplePapers/41. Mathewson et al., 2024, Psychophysiology, The moving wave  Applications of the mobile EEG approach to study human attention.pdf",
+      "path": "examplePapers/41. Mathewson et al., 2024, Psychophysiology, The moving wave  Applications of the mobile EEG approach to study human attention.pdf",
+      "href": "examplePapers/41. Mathewson et al., 2024, Psychophysiology, The moving wave  Applications of the mobile EEG approach to study human attention.pdf",
+      "ext": ".pdf",
+      "size": 4744023,
+      "mtime": 1792043024.3551097,
+      "pages": 20,
+      "year": 2024,
+      "authors": "Mathewson",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2024",
+          "path": "year/2024",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 38,
+      "filename": "42. Sood et al., 2024, J Stroke Cerebvsc Disease - EEG Assessment in Stroke Review.pdf",
+      "title": "Quantitative electroencephalography to assess post-stroke functional disability: A systematic review and meta-analysis",
+      "relpath": "examplePapers/42. Sood et al., 2024, J Stroke Cerebvsc Disease - EEG Assessment in Stroke Review.pdf",
+      "path": "examplePapers/42. Sood et al., 2024, J Stroke Cerebvsc Disease - EEG Assessment in Stroke Review.pdf",
+      "href": "examplePapers/42. Sood et al., 2024, J Stroke Cerebvsc Disease - EEG Assessment in Stroke Review.pdf",
+      "ext": ".pdf",
+      "size": 3481749,
+      "mtime": 1792043024.3630424,
+      "pages": 11,
+      "year": 2024,
+      "authors": "Sood",
+      "journal": "J Stroke Cerebrovasc Dis",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2024",
+          "path": "year/2024",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Stroke Cerebrovasc Dis",
+          "path": "journal/J Stroke Cerebrovasc Dis",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 39,
+      "filename": "5. Jensen & Mathewson, Perception, 2011 .PDF",
+      "title": "Jensen & Mathewson, Perception, 2011",
+      "relpath": "examplePapers/5. Jensen & Mathewson, Perception, 2011 .PDF",
+      "path": "examplePapers/5. Jensen & Mathewson, Perception, 2011 .PDF",
+      "href": "examplePapers/5. Jensen & Mathewson, Perception, 2011 .PDF",
+      "ext": ".pdf",
+      "size": 258822,
+      "mtime": 1792043024.178957,
+      "pages": 4,
+      "year": 2011,
+      "authors": "Jensen; Mathewson",
+      "journal": "Perception",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2011",
+          "path": "year/2011",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Perception",
+          "path": "journal/Perception",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 40,
+      "filename": "6. Mathewson et al., 2011, Frontiers in Perception Science.pdf",
+      "title": "Pulsed out of awareness: EEG alpha oscillations represent a pulsed-inhibition of ongoing cortical processing",
+      "relpath": "examplePapers/6. Mathewson et al., 2011, Frontiers in Perception Science.pdf",
+      "path": "examplePapers/6. Mathewson et al., 2011, Frontiers in Perception Science.pdf",
+      "href": "examplePapers/6. Mathewson et al., 2011, Frontiers in Perception Science.pdf",
+      "ext": ".pdf",
+      "size": 1677459,
+      "mtime": 1792043024.1828034,
+      "pages": 15,
+      "year": 2011,
+      "authors": "Mathewson",
+      "journal": "Frontiers",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2011",
+          "path": "year/2011",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Frontiers",
+          "path": "journal/Frontiers",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 41,
+      "filename": "7. Zhu,Mathewson,Hsu, PNAS, 2012.pdf",
+      "title": "Zhu,Mathewson,Hsu, PNAS, 2012",
+      "relpath": "examplePapers/7. Zhu,Mathewson,Hsu, PNAS, 2012.pdf",
+      "path": "examplePapers/7. Zhu,Mathewson,Hsu, PNAS, 2012.pdf",
+      "href": "examplePapers/7. Zhu,Mathewson,Hsu, PNAS, 2012.pdf",
+      "ext": ".pdf",
+      "size": 880187,
+      "mtime": 1792043024.1886435,
+      "pages": 11,
+      "year": 2012,
+      "authors": "Zhu; Mathewson; Hsu",
+      "journal": "PNAS",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2012",
+          "path": "year/2012",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "PNAS",
+          "path": "journal/PNAS",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 42,
+      "filename": "8. Mathewson et al, JOCN, 2012 - Entrainment EEG.pdf",
+      "title": "Mathewson et al, JOCN, 2012 - Entrainment EEG",
+      "relpath": "examplePapers/8. Mathewson et al, JOCN, 2012 - Entrainment EEG.pdf",
+      "path": "examplePapers/8. Mathewson et al, JOCN, 2012 - Entrainment EEG.pdf",
+      "href": "examplePapers/8. Mathewson et al, JOCN, 2012 - Entrainment EEG.pdf",
+      "ext": ".pdf",
+      "size": 472884,
+      "mtime": 1792043024.1916008,
+      "pages": 13,
+      "year": 2012,
+      "authors": "Mathewson",
+      "journal": "J Cogn Neurosci",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2012",
+          "path": "year/2012",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "J Cogn Neurosci",
+          "path": "journal/J Cogn Neurosci",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    },
+    {
+      "id": 43,
+      "filename": "9. Mathewson et al., 2012 - Psychophysiology - Space Fortress Prediction.pdf",
+      "title": "Different slopes for different folks: Alpha and delta EEG power predict subsequent video game learning rate and improvements in cognitive control tasks",
+      "relpath": "examplePapers/9. Mathewson et al., 2012 - Psychophysiology - Space Fortress Prediction.pdf",
+      "path": "examplePapers/9. Mathewson et al., 2012 - Psychophysiology - Space Fortress Prediction.pdf",
+      "href": "examplePapers/9. Mathewson et al., 2012 - Psychophysiology - Space Fortress Prediction.pdf",
+      "ext": ".pdf",
+      "size": 1420497,
+      "mtime": 1792043024.197264,
+      "pages": 13,
+      "year": 2012,
+      "authors": "Mathewson",
+      "journal": "Psychophysiology",
+      "folder": "examplePapers",
+      "tags": [
+        {
+          "name": "Year",
+          "path": "year",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "2012",
+          "path": "year/2012",
+          "parent": "year",
+          "group": false
+        },
+        {
+          "name": "Journal",
+          "path": "journal",
+          "parent": null,
+          "group": true
+        },
+        {
+          "name": "Psychophysiology",
+          "path": "journal/Psychophysiology",
+          "parent": "journal",
+          "group": false
+        }
+      ],
+      "preview": true
+    }
+  ],
+  "embed": {
+    "ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43
+    ],
+    "layouts": {
+      "joint": [
+        [
+          1.50600004196167,
+          0.6031000018119812
+        ],
+        [
+          1.2508000135421753,
+          1.486299991607666
+        ],
+        [
+          2.158799886703491,
+          0.8054999709129333
+        ],
+        [
+          -0.17270000278949738,
+          0.163100004196167
+        ],
+        [
+          2.0473999977111816,
+          1.0206999778747559
+        ],
+        [
+          -0.5580000281333923,
+          0.8427000045776367
+        ],
+        [
+          -1.6167999505996704,
+          0.2353000044822693
+        ],
+        [
+          -2.2632999420166016,
+          -0.3452000021934509
+        ],
+        [
+          -0.4074000120162964,
+          1.0077999830245972
+        ],
+        [
+          1.1926000118255615,
+          1.8162000179290771
+        ],
+        [
+          0.9156000018119812,
+          1.6035000085830688
+        ],
+        [
+          1.4838000535964966,
+          0.2928999960422516
+        ],
+        [
+          -0.23499999940395355,
+          -1.0920000076293945
+        ],
+        [
+          0.2883000075817108,
+          -1.49590003490448
+        ],
+        [
+          0.12129999697208405,
+          -1.621000051498413
+        ],
+        [
+          -0.6908000111579895,
+          -1.1842000484466553
+        ],
+        [
+          0.829800009727478,
+          0.22840000689029694
+        ],
+        [
+          1.2663999795913696,
+          -0.7860999703407288
+        ],
+        [
+          -1.1825000047683716,
+          -0.5187000036239624
+        ],
+        [
+          -2.0764000415802,
+          -0.4973999857902527
+        ],
+        [
+          0.18400000035762787,
+          0.38940000534057617
+        ],
+        [
+          -0.8199999928474426,
+          -0.05959999933838844
+        ],
+        [
+          -1.417099952697754,
+          -0.04650000110268593
+        ],
+        [
+          1.5989999771118164,
+          -0.026900000870227814
+        ],
+        [
+          -0.34220001101493835,
+          -0.7265999913215637
+        ],
+        [
+          -0.5813999772071838,
+          0.39989998936653137
+        ],
+        [
+          -0.8299999833106995,
+          -0.8794999718666077
+        ],
+        [
+          -0.22519999742507935,
+          0.499099999666214
+        ],
+        [
+          -0.7353000044822693,
+          -0.3400000035762787
+        ],
+        [
+          -1.4158999919891357,
+          -0.5975000262260437
+        ],
+        [
+          -1.6159000396728516,
+          -0.8913999795913696
+        ],
+        [
+          -1.666700005531311,
+          -1.1892000436782837
+        ],
+        [
+          -0.5052000284194946,
+          -0.10930000245571136
+        ],
+        [
+          -0.3935000002384186,
+          -0.4876999855041504
+        ],
+        [
+          0.7116000056266785,
+          -0.3476000130176544
+        ],
+        [
+          -1.0879000425338745,
+          0.6837999820709229
+        ],
+        [
+          0.44929999113082886,
+          -0.5116999745368958
+        ],
+        [
+          -0.028599999845027924,
+          0.7803999781608582
+        ],
+        [
+          1.0602999925613403,
+          0.2840000092983246
+        ],
+        [
+          1.0943000316619873,
+          -0.5688999891281128
+        ],
+        [
+          1.1899000406265259,
+          0.6557999849319458
+        ],
+        [
+          1.0289000272750854,
+          1.3145999908447266
+        ],
+        [
+          0.4893999993801117,
+          -0.7897999882698059
+        ]
+      ],
+      "journal": [
+        [
+          -0.5160999894142151,
+          -0.046300001442432404
+        ],
+        [
+          0.7574999928474426,
+          1.2473000288009644
+        ],
+        [
+          -1.4536999464035034,
+          -0.955299973487854
+        ],
+        [
+          0.4440000057220459,
+          -0.01080000028014183
+        ],
+        [
+          -1.7400000095367432,
+          -0.6377000212669373
+        ],
+        [
+          1.1331000328063965,
+          0.01850000023841858
+        ],
+        [
+          0.4896000027656555,
+          -1.2247999906539917
+        ],
+        [
+          -0.19470000267028809,
+          0.44269999861717224
+        ],
+        [
+          -0.4106999933719635,
+          1.045699954032898
+        ],
+        [
+          0.7092000246047974,
+          1.2720999717712402
+        ],
+        [
+          0.7404000163078308,
+          1.2000999450683594
+        ],
+        [
+          -1.2569999694824219,
+          -0.08139999955892563
+        ],
+        [
+          0.44130000472068787,
+          -1.1999000310897827
+        ],
+        [
+          0.4724999964237213,
+          -1.2719999551773071
+        ],
+        [
+          0.5024999976158142,
+          -1.1801999807357788
+        ],
+        [
+          0.4122999906539917,
+          0.34150001406669617
+        ],
+        [
+          -0.3537999987602234,
+          1.643399953842163
+        ],
+        [
+          2.0011000633239746,
+          0.29750001430511475
+        ],
+        [
+          -2.1530001163482666,
+          0.27410000562667847
+        ],
+        [
+          -0.24300000071525574,
+          0.4675000011920929
+        ],
+        [
+          0.6851999759674072,
+          1.9316999912261963
+        ],
+        [
+          -0.8730999827384949,
+          -1.1865999698638916
+        ],
+        [
+          0.4056999981403351,
+          -1.23580002784729
+        ],
+        [
+          -0.9344000220298767,
+          -0.37450000643730164
+        ],
+        [
+          0.5278000235557556,
+          -1.2625000476837158
+        ],
+        [
+          0.2833999991416931,
+          0.6973000168800354
+        ],
+        [
+          -1.420699954032898,
+          0.314300000667572
+        ],
+        [
+          -0.9449999928474426,
+          0.26499998569488525
+        ],
+        [
+          1.4372999668121338,
+          0.8306999802589417
+        ],
+        [
+          -2.2012999057769775,
+          0.29899999499320984
+        ],
+        [
+          -1.0989999771118164,
+          0.9950000047683716
+        ],
+        [
+          -1.1473000049591064,
+          1.0198999643325806
+        ],
+        [
+          -0.033399999141693115,
+          -0.2467000037431717
+        ],
+        [
+          0.44850000739097595,
+          -1.1509000062942505
+        ],
+        [
+          0.43050000071525574,
+          -1.297700047492981
+        ],
+        [
+          -0.9472000002861023,
+          -1.5202000141143799
+        ],
+        [
+          0.5504999756813049,
+          -1.194700002670288
+        ],
+        [
+          0.9390000104904175,
+          0.4377000033855438
+        ],
+        [
+          -0.40209999680519104,
+          1.6682000160217285
+        ],
+        [
+          1.9528000354766846,
+          0.322299987077713
+        ],
+        [
+          1.3788000345230103,
+          -0.870199978351593
+        ],
+        [
+          0.7703999876976013,
+          1.2919000387191772
+        ],
+        [
+          0.3828999996185303,
+          -1.1894999742507935
+        ]
+      ],
+      "year": [
+        [
+          1.482800006866455,
+          1.5334999561309814
+        ],
+        [
+          1.4555000066757202,
+          -0.7515000104904175
+        ],
+        [
+          1.4071999788284302,
+          -0.7265999913215637
+        ],
+        [
+          1.4385000467300415,
+          -0.7986999750137329
+        ],
+        [
+          1.468500018119812,
+          -0.7069000005722046
+        ],
+        [
+          1.8422000408172607,
+          0.43880000710487366
+        ],
+        [
+          0.08340000361204147,
+          -1.6669000387191772
+        ],
+        [
+          0.035100001841783524,
+          -1.6420999765396118
+        ],
+        [
+          1.7939000129699707,
+          0.4636000096797943
+        ],
+        [
+          0.06629999727010727,
+          -1.7141000032424927
+        ],
+        [
+          0.09629999846220016,
+          -1.6223000288009644
+        ],
+        [
+          -0.8725000023841858,
+          1.548699975013733
+        ],
+        [
+          -0.0005000000237487257,
+          -1.6779999732971191
+        ],
+        [
+          0.12150000035762787,
+          -1.7045999765396118
+        ],
+        [
+          0.04230000078678131,
+          -1.593000054359436
+        ],
+        [
+          -0.2207999974489212,
+          -0.03009999915957451
+        ],
+        [
+          -0.8725000023841858,
+          1.548699975013733
+        ],
+        [
+          -0.26910001039505005,
+          -0.0052999998442828655
+        ],
+        [
+          -0.2379000037908554,
+          -0.07739999890327454
+        ],
+        [
+          -0.2079000025987625,
+          0.014399999752640724
+        ],
+        [
+          -0.920799970626831,
+          1.5736000537872314
+        ],
+        [
+          -0.30469998717308044,
+          -0.041200000792741776
+        ],
+        [
+          -0.1826999932527542,
+          -0.06790000200271606
+        ],
+        [
+          -0.920799970626831,
+          1.5736000537872314
+        ],
+        [
+          -0.26190000772476196,
+          0.043699998408555984
+        ],
+        [
+          1.0103000402450562,
+          1.0607000589370728
+        ],
+        [
+          -0.2799000144004822,
+          -0.10300000011920929
+        ],
+        [
+          0.9049000144004822,
+          0.29269999265670776
+        ],
+        [
+          -0.1598999947309494,
+          -9.999999747378752e-05
+        ],
+        [
+          -0.32749998569488525,
+          0.005200000014156103
+        ],
+        [
+          -0.20080000162124634,
+          -0.11819999665021896
+        ],
+        [
+          -0.21160000562667847,
+          0.06700000166893005
+        ],
+        [
+          -0.33379998803138733,
+          -0.08330000191926956
+        ],
+        [
+          -0.13439999520778656,
+          -0.05380000174045563
+        ],
+        [
+          0.6728000044822693,
+          1.7518999576568604
+        ],
+        [
+          0.021800000220537186,
+          1.1454999446868896
+        ],
+        [
+          -1.6155999898910522,
+          0.5501000285148621
+        ],
+        [
+          -1.6639000177383423,
+          0.574999988079071
+        ],
+        [
+          0.6244999766349792,
+          1.7767000198364258
+        ],
+        [
+          0.6557999849319458,
+          1.7045999765396118
+        ],
+        [
+          -1.6295000314712524,
+          -0.7883999943733215
+        ],
+        [
+          -1.6778000593185425,
+          -0.7635999917984009
+        ],
+        [
+          -1.6466000080108643,
+          -0.8356999754905701
+        ]
+      ],
+      "title": [
+        [
+          1.7117999792099,
+          0.84170001745224
+        ],
+        [
+          1.4864000082015991,
+          1.2829999923706055
+        ],
+        [
+          0.571399986743927,
+          -0.027799999341368675
+        ],
+        [
+          0.18529999256134033,
+          0.19550000131130219
+        ],
+        [
+          -1.569700002670288,
+          -0.26030001044273376
+        ],
+        [
+          0.5976999998092651,
+          -0.2865000069141388
+        ],
+        [
+          -1.8315999507904053,
+          -0.9459999799728394
+        ],
+        [
+          -1.7367000579833984,
+          -0.7281000018119812
+        ],
+        [
+          0.6934999823570251,
+          0.04560000076889992
+        ],
+        [
+          0.6934999823570251,
+          0.8349000215530396
+        ],
+        [
+          1.3983999490737915,
+          1.5645999908447266
+        ],
+        [
+          1.7098000049591064,
+          0.8450999855995178
+        ],
+        [
+          -0.6729999780654907,
+          1.0906000137329102
+        ],
+        [
+          1.0155999660491943,
+          -1.0003000497817993
+        ],
+        [
+          1.0156999826431274,
+          -0.9997000098228455
+        ],
+        [
+          -0.6732000112533569,
+          1.0914000272750854
+        ],
+        [
+          0.40389999747276306,
+          0.18250000476837158
+        ],
+        [
+          0.6729999780654907,
+          0.32679998874664307
+        ],
+        [
+          0.10090000182390213,
+          -1.0226999521255493
+        ],
+        [
+          -1.5987000465393066,
+          -0.8385999798774719
+        ],
+        [
+          0.3596000075340271,
+          -0.23240000009536743
+        ],
+        [
+          0.49399998784065247,
+          -0.08739999681711197
+        ],
+        [
+          -1.7841999530792236,
+          -0.9860000014305115
+        ],
+        [
+          0.10140000283718109,
+          -1.0232000350952148
+        ],
+        [
+          -0.6729000210762024,
+          1.0907000303268433
+        ],
+        [
+          0.03759999945759773,
+          -0.06509999930858612
+        ],
+        [
+          0.8478999733924866,
+          -0.11420000344514847
+        ],
+        [
+          0.29350000619888306,
+          0.4546000063419342
+        ],
+        [
+          0.17839999496936798,
+          -0.303600013256073
+        ],
+        [
+          -1.608299970626831,
+          -0.8138999938964844
+        ],
+        [
+          -1.7877000570297241,
+          -0.760200023651123
+        ],
+        [
+          -1.2366000413894653,
+          -1.4917999505996704
+        ],
+        [
+          0.037300001829862595,
+          0.2994000017642975
+        ],
+        [
+          0.6035000085830688,
+          0.25920000672340393
+        ],
+        [
+          0.3578000068664551,
+          -0.01269999984651804
+        ],
+        [
+          -0.6730999946594238,
+          1.09089994430542
+        ],
+        [
+          -1.6757999658584595,
+          -0.9474999904632568
+        ],
+        [
+          0.3601999878883362,
+          0.33559998869895935
+        ],
+        [
+          1.7091000080108643,
+          0.8449000120162964
+        ],
+        [
+          -1.8808000087738037,
+          -0.8199999928474426
+        ],
+        [
+          1.7131999731063843,
+          0.838100016117096
+        ],
+        [
+          1.3667999505996704,
+          1.6497999429702759
+        ],
+        [
+          -1.315000057220459,
+          -1.3967000246047974
+        ]
+      ],
+      "folder": [
+        [
+          1.50600004196167,
+          0.6031000018119812
+        ],
+        [
+          1.2508000135421753,
+          1.486299991607666
+        ],
+        [
+          2.158799886703491,
+          0.8054999709129333
+        ],
+        [
+          -0.17270000278949738,
+          0.163100004196167
+        ],
+        [
+          2.0473999977111816,
+          1.0206999778747559
+        ],
+        [
+          -0.5580000281333923,
+          0.8427000045776367
+        ],
+        [
+          -1.6167999505996704,
+          0.2353000044822693
+        ],
+        [
+          -2.2632999420166016,
+          -0.3452000021934509
+        ],
+        [
+          -0.4074000120162964,
+          1.0077999830245972
+        ],
+        [
+          1.1926000118255615,
+          1.8162000179290771
+        ],
+        [
+          0.9156000018119812,
+          1.6035000085830688
+        ],
+        [
+          1.4838000535964966,
+          0.2928999960422516
+        ],
+        [
+          -0.23499999940395355,
+          -1.0920000076293945
+        ],
+        [
+          0.2883000075817108,
+          -1.49590003490448
+        ],
+        [
+          0.12129999697208405,
+          -1.621000051498413
+        ],
+        [
+          -0.6908000111579895,
+          -1.1842000484466553
+        ],
+        [
+          0.829800009727478,
+          0.22840000689029694
+        ],
+        [
+          1.2663999795913696,
+          -0.7860999703407288
+        ],
+        [
+          -1.1825000047683716,
+          -0.5187000036239624
+        ],
+        [
+          -2.0764000415802,
+          -0.4973999857902527
+        ],
+        [
+          0.18400000035762787,
+          0.38940000534057617
+        ],
+        [
+          -0.8199999928474426,
+          -0.05959999933838844
+        ],
+        [
+          -1.417099952697754,
+          -0.04650000110268593
+        ],
+        [
+          1.5989999771118164,
+          -0.026900000870227814
+        ],
+        [
+          -0.34220001101493835,
+          -0.7265999913215637
+        ],
+        [
+          -0.5813999772071838,
+          0.39989998936653137
+        ],
+        [
+          -0.8299999833106995,
+          -0.8794999718666077
+        ],
+        [
+          -0.22519999742507935,
+          0.499099999666214
+        ],
+        [
+          -0.7353000044822693,
+          -0.3400000035762787
+        ],
+        [
+          -1.4158999919891357,
+          -0.5975000262260437
+        ],
+        [
+          -1.6159000396728516,
+          -0.8913999795913696
+        ],
+        [
+          -1.666700005531311,
+          -1.1892000436782837
+        ],
+        [
+          -0.5052000284194946,
+          -0.10930000245571136
+        ],
+        [
+          -0.3935000002384186,
+          -0.4876999855041504
+        ],
+        [
+          0.7116000056266785,
+          -0.3476000130176544
+        ],
+        [
+          -1.0879000425338745,
+          0.6837999820709229
+        ],
+        [
+          0.44929999113082886,
+          -0.5116999745368958
+        ],
+        [
+          -0.028599999845027924,
+          0.7803999781608582
+        ],
+        [
+          1.0602999925613403,
+          0.2840000092983246
+        ],
+        [
+          1.0943000316619873,
+          -0.5688999891281128
+        ],
+        [
+          1.1899000406265259,
+          0.6557999849319458
+        ],
+        [
+          1.0289000272750854,
+          1.3145999908447266
+        ],
+        [
+          0.4893999993801117,
+          -0.7897999882698059
+        ]
+      ],
+      "author": [
+        [
+          1.538100004196167,
+          0.3684000074863434
+        ],
+        [
+          1.489799976348877,
+          0.39320001006126404
+        ],
+        [
+          0.9848999977111816,
+          -0.7511000037193298
+        ],
+        [
+          -1.1690000295639038,
+          0.20010000467300415
+        ],
+        [
+          0.7771999835968018,
+          -0.5467000007629395
+        ],
+        [
+          -0.7949000000953674,
+          0.012600000016391277
+        ],
+        [
+          0.4805999994277954,
+          1.2910000085830688
+        ],
+        [
+          1.187600016593933,
+          1.1090999841690063
+        ],
+        [
+          -1.844099998474121,
+          -0.04670000076293945
+        ],
+        [
+          -0.7322999835014343,
+          0.48919999599456787
+        ],
+        [
+          0.19679999351501465,
+          1.3603999614715576
+        ],
+        [
+          1.5210000276565552,
+          0.32109999656677246
+        ],
+        [
+          -0.9695000052452087,
+          -1.5467000007629395
+        ],
+        [
+          0.09309999644756317,
+          -1.5463000535964966
+        ],
+        [
+          0.04479999840259552,
+          -1.5214999914169312
+        ],
+        [
+          -1.017799973487854,
+          -1.5218000411987305
+        ],
+        [
+          1.5509999990463257,
+          0.41290000081062317
+        ],
+        [
+          1.9021999835968018,
+          1.09089994430542
+        ],
+        [
+          -1.4041999578475952,
+          0.60589998960495
+        ],
+        [
+          -0.048500001430511475,
+          -0.7039999961853027
+        ],
+        [
+          -1.8289999961853027,
+          0.5210999846458435
+        ],
+        [
+          -1.424299955368042,
+          -0.7653999924659729
+        ],
+        [
+          -0.3765000104904175,
+          1.205199956893921
+        ],
+        [
+          1.454200029373169,
+          0.3573000133037567
+        ],
+        [
+          -1.034500002861023,
+          -0.5759000182151794
+        ],
+        [
+          -0.4399999976158142,
+          0.15279999375343323
+        ],
+        [
+          -1.3438999652862549,
+          -1.5435999631881714
+        ],
+        [
+          -1.5289000272750854,
+          0.23250000178813934
+        ],
+        [
+          -1.742900013923645,
+          -0.5573999881744385
+        ],
+        [
+          -0.6381000280380249,
+          -0.325300008058548
+        ],
+        [
+          -0.20659999549388885,
+          -0.23810000717639923
+        ],
+        [
+          0.00839999970048666,
+          0.4887999892234802
+        ],
+        [
+          -1.0808000564575195,
+          -0.20270000398159027
+        ],
+        [
+          -0.9259999990463257,
+          0.7926999926567078
+        ],
+        [
+          1.381100058555603,
+          -0.20730000734329224
+        ],
+        [
+          -0.6270999908447266,
+          -0.6794999837875366
+        ],
+        [
+          1.576300024986267,
+          0.33059999346733093
+        ],
+        [
+          -1.402999997138977,
+          -0.21529999375343323
+        ],
+        [
+          0.9345999956130981,
+          0.5644000172615051
+        ],
+        [
+          1.496999979019165,
+          0.4422999918460846
+        ],
+        [
+          0.9269000291824341,
+          0.11289999634027481
+        ],
+        [
+          1.4789999723434448,
+          0.2955000102519989
+        ],
+        [
+          1.5990999937057495,
+          0.3984000086784363
+        ]
+      ]
+    }
+  }
+}

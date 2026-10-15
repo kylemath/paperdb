@@ -267,7 +267,7 @@
   <div class="brand">
     <h1>Papers</h1>
     <p id="library-meta">Indexing the library…</p>
-    <p><a href="/map">Cluster map</a></p>
+    <p><a href="map.html">Cluster map</a></p>
   </div>
   <div class="search-wrap">
     <input id="q" type="search" placeholder="Search titles, filenames, and folders" autocomplete="off" autofocus>
@@ -285,7 +285,7 @@
 </header>
 <main>
   <aside>
-    <input id="tag-filter" type="search" placeholder="Filter folders" autocomplete="off">
+    <input id="tag-filter" type="search" placeholder="Filter tags" autocomplete="off">
     <div id="tag-tree"></div>
   </aside>
   <section class="results" id="results">
@@ -293,7 +293,7 @@
     <div id="hits"></div>
   </section>
   <section class="detail" id="detail">
-    <div class="placeholder">Select a paper to preview it. Folders are tags — choose one or several on the left.</div>
+    <div class="placeholder">Select a paper to preview it. Choose one or several tags on the left.</div>
   </section>
 </main>
 <script>
@@ -311,6 +311,8 @@ const state = {
   expanded: new Set(),
   tagQuery: "",
   selectedId: null,
+  mode: "api",
+  staticPapers: [],
   generation: 0,
   indexedAt: null,
   root: "",
@@ -357,6 +359,18 @@ function formatDate(unix) {
 
 function extLabel(ext) {
   return (ext || "").replace(".", "").toUpperCase() || "FILE";
+}
+
+function fileUrl(relpath) {
+  return String(relpath || "").split("/").map((part) => encodeURIComponent(part)).join("/");
+}
+
+function citeAuthors(value) {
+  return String(value || "").split(";").map((name) => name.trim()).filter(Boolean).join(", ");
+}
+
+function paperFile(paper) {
+  return state.mode === "static" ? fileUrl(paper.href || paper.relpath) : "file/" + paper.id;
 }
 
 function childMap() {
@@ -498,6 +512,16 @@ function renderHits(append) {
     heading.innerHTML = highlight(paper.title, state.q);
     top.append(badge, heading);
     button.append(top);
+    const citeBits = [];
+    if (paper.authors) citeBits.push(citeAuthors(paper.authors));
+    if (paper.journal) citeBits.push(paper.journal);
+    if (paper.year) citeBits.push(String(paper.year));
+    if (citeBits.length) {
+      const cite = document.createElement("div");
+      cite.className = "meta-line";
+      cite.textContent = citeBits.join(" · ");
+      button.append(cite);
+    }
     const stem = paper.filename.replace(/\.[^.]+$/, "").replace(/_/g, " ");
     if (stem.toLowerCase() !== paper.title.toLowerCase()) {
       const file = document.createElement("div");
@@ -508,7 +532,6 @@ function renderHits(append) {
     const meta = document.createElement("div");
     meta.className = "meta-line";
     const bits = [];
-    if (paper.year) bits.push(String(paper.year));
     if (paper.pages) bits.push(paper.pages + " pp");
     bits.push(formatSize(paper.size));
     meta.textContent = bits.join(" · ");
@@ -516,6 +539,7 @@ function renderHits(append) {
     const crumbs = document.createElement("div");
     crumbs.className = "crumbs";
     for (const tag of paper.tags) {
+      if (tag.group || String(tag.path || "").startsWith("year/") || String(tag.path || "").startsWith("journal/")) continue;
       const crumb = document.createElement("span");
       crumb.className = "crumb";
       crumb.innerHTML = highlight(tag.name, state.q);
@@ -556,7 +580,17 @@ function renderDetail(paper) {
   card.append(file);
   const crumbs = document.createElement("div");
   crumbs.className = "crumbs";
+  const citeBits = [];
+  if (paper.authors) citeBits.push(citeAuthors(paper.authors));
+  if (paper.journal) citeBits.push(paper.journal);
+  if (citeBits.length) {
+    const cite = document.createElement("div");
+    cite.className = "meta-line";
+    cite.textContent = citeBits.join(" · ");
+    card.append(cite);
+  }
   for (const tag of paper.tags) {
+    if (tag.group || String(tag.path || "").startsWith("year/") || String(tag.path || "").startsWith("journal/")) continue;
     const button = document.createElement("button");
     button.type = "button";
     button.className = "crumb";
@@ -599,7 +633,8 @@ function renderDetail(paper) {
       copy.textContent = "Copy failed";
     }
   });
-  actions.append(open, reveal, copy);
+  if (state.mode === "static") actions.append(open, copy);
+  else actions.append(open, reveal, copy);
   card.append(actions);
   const path = document.createElement("div");
   path.className = "path";
@@ -612,14 +647,14 @@ function renderDetail(paper) {
     pre.id = "text-preview";
     pre.textContent = "Loading…";
     detailEl.append(pre);
-    fetch("/file/" + paper.id).then((response) => response.text()).then((text) => {
+    fetch(paperFile(paper)).then((response) => response.text()).then((text) => {
       if (state.selectedId === paper.id) pre.textContent = text.slice(0, 200000);
     }).catch(() => { pre.textContent = "Could not read this file."; });
   } else if (paper.preview) {
     const frame = document.createElement("iframe");
     frame.id = "preview";
     frame.title = paper.title;
-    frame.src = "/file/" + paper.id;
+    frame.src = paperFile(paper);
     detailEl.append(frame);
   } else {
     const note = document.createElement("div");
@@ -638,11 +673,16 @@ function selectPaper(id) {
 }
 
 async function openPaper(id) {
-  await fetch("/api/open/" + id, { method: "POST" });
+  if (state.mode === "static") {
+    const paper = state.papers.find((item) => item.id === id);
+    if (paper) window.open(paperFile(paper), "_blank", "noopener");
+    return;
+  }
+  await fetch("api/open/" + id, { method: "POST" });
 }
 
 async function revealPaper(id) {
-  await fetch("/api/reveal/" + id, { method: "POST" });
+  await fetch("api/reveal/" + id, { method: "POST" });
 }
 
 function toggleTag(path) {
@@ -656,7 +696,94 @@ function toggleTag(path) {
   runSearch();
 }
 
+function queryParts(query) {
+  const parts = [];
+  for (const match of String(query).matchAll(/"([^"]+)"|(\S+)/g)) {
+    if (match[1]) {
+      const phrase = match[1].toLowerCase().trim();
+      if (phrase) parts.push({ phrase });
+    } else {
+      const prefix = (match[2].toLowerCase().match(/[\p{L}\p{N}]+/gu) || []);
+      if (prefix.length) parts.push({ prefix });
+    }
+  }
+  return parts;
+}
+
+function paperText(paper) {
+  return [
+    paper.title, paper.filename, paper.authors, paper.journal, paper.year,
+    ...(paper.tags || []).map((tag) => tag.name),
+  ].join(" ");
+}
+
+function matchesQuery(paper, parts) {
+  if (!parts.length) return true;
+  const hay = paperText(paper).toLowerCase();
+  const tokens = hay.match(/[\p{L}\p{N}]+/gu) || [];
+  return parts.every((part) => {
+    if (part.phrase) return hay.includes(part.phrase);
+    return part.prefix.every((prefix) => tokens.some((token) => token.startsWith(prefix)));
+  });
+}
+
+function hasTag(paper, path) {
+  return (paper.tags || []).some((tag) => tag.path === path || String(tag.path || "").startsWith(path + "/"));
+}
+
+function relevance(paper, parts) {
+  const title = String(paper.title || "").toLowerCase();
+  const filename = String(paper.filename || "").toLowerCase();
+  let rank = 0;
+  for (const part of parts) {
+    const bits = part.phrase ? [part.phrase] : part.prefix;
+    for (const bit of bits) {
+      if (title.includes(bit)) rank += 3;
+      else if (filename.includes(bit)) rank += 2;
+      else rank += 1;
+    }
+  }
+  return rank;
+}
+
+function comparePapers(a, b, parts) {
+  if (state.sort === "year") return (b.year || 0) - (a.year || 0) || a.title.localeCompare(b.title);
+  if (state.sort === "modified") return (b.mtime || 0) - (a.mtime || 0);
+  if (state.sort === "title" || !parts.length) return a.title.localeCompare(b.title, undefined, { sensitivity: "base" });
+  return relevance(b, parts) - relevance(a, parts) || a.title.localeCompare(b.title, undefined, { sensitivity: "base" });
+}
+
+function runStaticSearch({ append = false } = {}) {
+  const generation = append ? state.generation : ++state.generation;
+  if (!append) {
+    state.offset = 0;
+    state.selectedId = null;
+  } else {
+    state.offset = state.papers.length;
+  }
+  const parts = queryParts(state.q);
+  const matched = state.staticPapers.filter((paper) => matchesQuery(paper, parts) && state.tags.every((path) => hasTag(paper, path)));
+  matched.sort((a, b) => comparePapers(a, b, parts));
+  const counts = {};
+  for (const tag of state.catalog) counts[tag.path] = matched.filter((paper) => hasTag(paper, tag.path)).length;
+  const page = matched.slice(state.offset, state.offset + state.limit);
+  if (generation !== state.generation) return;
+  state.total = matched.length;
+  state.facet = state.q.trim() || state.tags.length ? counts : null;
+  state.papers = append ? state.papers.concat(page) : page;
+  renderHits(append ? page.length : 0);
+  renderTags();
+  if (!append) {
+    if (state.papers.length) selectPaper(state.papers[0].id);
+    else renderDetail(null);
+  }
+}
+
 async function runSearch({ append = false } = {}) {
+  if (state.mode === "static") {
+    runStaticSearch({ append });
+    return;
+  }
   const generation = append ? state.generation : ++state.generation;
   if (!append) {
     state.offset = 0;
@@ -670,7 +797,7 @@ async function runSearch({ append = false } = {}) {
   params.set("offset", String(state.offset));
   params.set("limit", String(state.limit));
   for (const tag of state.tags) params.append("tag", tag);
-  const response = await fetch("/api/search?" + params);
+  const response = await fetch("api/search?" + params);
   const data = await response.json();
   if (generation !== state.generation) return;
   if (!response.ok) {
@@ -731,23 +858,60 @@ document.addEventListener("keydown", (event) => {
   hitsEl.querySelector(".hit.selected")?.scrollIntoView({ block: "nearest" });
 });
 
-async function boot() {
-  const meta = await fetch("/api/tags").then((response) => response.json());
+async function bootFromApi(meta) {
+  state.mode = "api";
   state.catalog = meta.tags;
   state.libraryCount = meta.papers;
   state.indexedAt = meta.indexed_at;
   state.root = meta.root;
-  for (const tag of meta.tags) state.baseCounts[tag.path] = tag.count;
+  for (const tag of meta.tags) {
+    state.baseCounts[tag.path] = tag.count;
+    if (tag.group) state.expanded.add(tag.path);
+  }
   const when = meta.indexed_at ? new Date(meta.indexed_at).toLocaleString() : "unknown";
   $("library-meta").textContent = meta.papers.toLocaleString() + " documents · indexed " + when;
   renderTags();
   await runSearch();
 }
 
-boot().catch((error) => {
-  $("library-meta").textContent = "Could not load the catalog.";
-  console.error(error);
-});
+async function bootStatic() {
+  const response = await fetch("library.json");
+  if (!response.ok) throw new Error("library.json missing");
+  const library = await response.json();
+  state.mode = "static";
+  state.staticPapers = library.papers || [];
+  state.catalog = library.tags || [];
+  state.libraryCount = library.count || state.staticPapers.length;
+  state.indexedAt = library.indexed_at || null;
+  state.root = library.source || "examplePapers";
+  for (const tag of state.catalog) {
+    state.baseCounts[tag.path] = tag.count || 0;
+    if (tag.group) state.expanded.add(tag.path);
+  }
+  const when = library.indexed_at ? new Date(library.indexed_at).toLocaleString() : "the example set";
+  $("library-meta").textContent = state.libraryCount.toLocaleString() + " papers · indexed " + when;
+  renderTags();
+  await runSearch();
+}
+
+async function boot() {
+  try {
+    const response = await fetch("api/tags");
+    if (!response.ok) throw new Error("no catalog api");
+    const meta = await response.json();
+    if (!meta || !Array.isArray(meta.tags)) throw new Error("bad catalog");
+    await bootFromApi(meta);
+  } catch (error) {
+    try {
+      await bootStatic();
+    } catch (staticError) {
+      $("library-meta").textContent = "Could not load the catalog.";
+      console.error(error, staticError);
+    }
+  }
+}
+
+boot();
 </script>
 </body>
 </html>

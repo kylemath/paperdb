@@ -7,6 +7,7 @@ Open the browser with `python3 paperdb.py`.
 
 from __future__ import annotations
 
+import html
 import json
 import os
 import plistlib
@@ -37,7 +38,10 @@ CONTENT_TYPES = {
     ".txt": "text/plain; charset=utf-8",
     ".htm": "text/html; charset=utf-8",
     ".html": "text/html; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".md": "text/markdown; charset=utf-8",
 }
+STATIC_FILES = {"library.json", "embed.json", "map.html", "index.html", "catalogue.json", "README.md"}
 PREVIEWABLE = {".pdf", ".txt", ".htm", ".html"}
 UNFILED = "."
 CLEANER_VERSION = "2"
@@ -227,6 +231,32 @@ JOURNAL_ALIASES: tuple[tuple[str, str], ...] = tuple(
             ("int j psychophysiol", "Int J Psychophysiol"),
             ("int j o psychphys", "Int J Psychophysiol"),
             ("int j psychphys", "Int J Psychophysiol"),
+            ("journal of neuroscience methods", "J Neurosci Methods"),
+            ("j neurosci methods", "J Neurosci Methods"),
+            ("jneurosci methods", "J Neurosci Methods"),
+            ("jneurosci" "methods", "J Neurosci Methods"),
+            ("jnmeth", "J Neurosci Methods"),
+            ("advanced healthcare materials", "Adv Healthc Mater"),
+            ("adv healthcare mater", "Adv Healthc Mater"),
+            ("adv healthc mater", "Adv Healthc Mater"),
+            ("advhealthmat", "Adv Healthc Mater"),
+            ("nature biomedical engineering", "Nat Biomed Eng"),
+            ("nat biomed eng", "Nat Biomed Eng"),
+            ("natbioeng", "Nat Biomed Eng"),
+            ("scientificrep", "Sci Rep"),
+            ("sci reports", "Sci Rep"),
+            ("pscyhscience", "Psychol Sci"),
+            ("journal of sport and exercise psychology", "J Sport Exerc Psychol"),
+            ("j sport exerc psychol", "J Sport Exerc Psychol"),
+            ("jsep", "J Sport Exerc Psychol"),
+            ("frontiers in pharmacology", "Front Pharmacol"),
+            ("front pharmacol", "Front Pharmacol"),
+            ("frontpharmaco", "Front Pharmacol"),
+            ("bioengineering mdpi", "Bioengineering"),
+            ("bioengineering", "Bioengineering"),
+            ("journal of stroke and cerebrovascular diseases", "J Stroke Cerebrovasc Dis"),
+            ("j stroke cerebrovasc dis", "J Stroke Cerebrovasc Dis"),
+            ("j stroke cerebvsc disease", "J Stroke Cerebrovasc Dis"),
             ("tin", "Trends Neurosci"),
         ],
         key=lambda item: len(item[0]),
@@ -239,11 +269,21 @@ def _tokens(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
 
 
+# Short words that are also journal names. Away from a year they only count near
+# the start of the filename, so a title does not become the journal.
+AMBIGUOUS_JOURNALS = {"brain", "science", "nature", "cell", "cortex", "neuron", "perception", "cognition"}
+STATUS_WORDS = re.compile(
+    r"\b(in\s+press|in\s+print|under\s*review|accepted\s+preprint|accepted)\b",
+    re.IGNORECASE,
+)
+
+
 def find_journal(text: str) -> tuple[str | None, str]:
-    """Return the canonical journal and the filename text with that journal removed.
+    """Return the canonical journal and the filename text before that journal.
 
     The journal token is the alias sitting closest to the year, so a title that
-    merely mentions "brain" does not beat "JoN" next to the date.
+    merely mentions "brain" does not beat "JoN" next to the date. Authors are the
+    text in front of the journal.
     """
     tokens = _tokens(text).split()
     if not tokens:
@@ -253,7 +293,7 @@ def find_journal(text: str) -> tuple[str | None, str]:
         if re.fullmatch(r"(?:18|19|20)\d{2}", token) or re.fullmatch(r"[a-z]+\d{2}", token):
             year_at = index
             break
-    best: tuple[tuple[int, int, int], str, str] | None = None
+    best: tuple[tuple[int, int, int], str, str, int] | None = None
     for alias, canonical in JOURNAL_ALIASES:
         needle = _tokens(alias)
         parts = needle.split()
@@ -264,7 +304,8 @@ def find_journal(text: str) -> tuple[str | None, str]:
             if tokens[index : index + width] != parts:
                 continue
             if year_at is None:
-                if len(tokens) >= 6 and index > 3:
+                ambiguous = width == 1 and parts[0] in AMBIGUOUS_JOURNALS
+                if ambiguous and len(tokens) >= 6 and index > 3:
                     break
                 distance = index
             else:
@@ -273,14 +314,18 @@ def find_journal(text: str) -> tuple[str | None, str]:
                     break
             rank = (distance, -width, -len(needle))
             if best is None or rank < best[0]:
-                best = (rank, canonical, needle)
+                best = (rank, canonical, needle, index)
             break
     if best is None:
         return None, text
-    _, canonical, needle = best
+    _, canonical, needle, token_index = best
     pattern = re.sub(r"\\ ", r"[^A-Za-z0-9]+", re.escape(needle))
-    cleaned = re.sub(pattern, " ", text, count=1, flags=re.IGNORECASE)
-    return canonical, cleaned
+    prefix = text
+    for match in re.finditer(pattern, text, flags=re.IGNORECASE):
+        if len(_tokens(text[: match.start()]).split()) == token_index:
+            prefix = text[: match.start()]
+            break
+    return canonical, prefix
 
 
 def _author_names(raw: str) -> list[str]:
@@ -322,6 +367,7 @@ def cite_from_filename(filename: str) -> tuple[list[str], str | None, int | None
     stem = re.sub(r"^\d+\s*[.)]\s*", "", stem)
     year = guess_year(stem)
     journal, author_src = find_journal(stem)
+    author_src = STATUS_WORDS.sub(" ", author_src)
     if year is not None:
         full = str(year)
         at = author_src.find(full)
@@ -348,7 +394,8 @@ def pretty_stem(stem: str) -> str:
 def usable_title(title: str | None, filename: str) -> str | None:
     if not title:
         return None
-    text = title.strip()
+    text = html.unescape(title).replace("\xa0", " ")
+    text = re.sub(r"\s+", " ", text).strip()
     lowered = text.lower()
     if lowered in {"(null)", "null", "untitled", "untitled document", "pdf"}:
         return None
@@ -689,7 +736,8 @@ def search(query: str, tag_paths: list[str], sort: str, offset: int, limit: int)
         rows = con.execute(
             f"""
             SELECT papers.id, papers.filename, papers.title, papers.relpath, papers.path,
-                   papers.ext, papers.size, papers.mtime, papers.pages, papers.year
+                   papers.ext, papers.size, papers.mtime, papers.pages, papers.year,
+                   papers.authors, papers.journal
             FROM papers {join}{where}
             ORDER BY {order}
             LIMIT ? OFFSET ?
@@ -747,6 +795,8 @@ def attach_tags(con: sqlite3.Connection, rows: list[sqlite3.Row]) -> list[dict]:
                 "mtime": row["mtime"],
                 "pages": row["pages"],
                 "year": row["year"],
+                "authors": row["authors"] or "",
+                "journal": row["journal"] or "",
                 "tags": grouped[row["id"]],
                 "preview": row["ext"] in PREVIEWABLE,
             }
@@ -783,6 +833,87 @@ def catalog() -> dict:
         "indexed_at": indexed["value"] if indexed else None,
         "root": str(ROOT),
         "tags": tags,
+    }
+
+
+def demo_catalog() -> dict:
+    """Snapshot of examplePapers for GitHub Pages. Does not touch papers.db.
+
+    The example folder is flat, so each paper is tagged by the year and journal
+    parsed from its filename. PDF titles and page counts come from Spotlight.
+    """
+    root = HERE / "examplePapers"
+    if not root.is_dir():
+        sys.exit(f"Example papers folder not found: {root}")
+    paths = sorted(
+        (
+            path
+            for path in root.iterdir()
+            if path.is_file() and not path.name.startswith(".") and path.suffix.lower() in INCLUDE
+        ),
+        key=lambda path: path.name.lower(),
+    )
+    papers = []
+    tag_rows: dict[str, dict] = {}
+
+    def touch(name: str, path: str, parent: str | None, group: bool) -> None:
+        row = tag_rows.get(path)
+        if row is None:
+            tag_rows[path] = {"name": name, "path": path, "parent": parent, "group": group, "count": 0}
+        tag_rows[path]["count"] += 1
+
+    for paper_id, path in enumerate(paths, start=1):
+        try:
+            stat = path.stat()
+        except OSError:
+            continue
+        _, raw_title, pages = pdf_meta(str(path))
+        display_stem = re.sub(r"^\d+\s*[.)]\s*", "", path.stem)
+        title = usable_title(raw_title, path.name) or pretty_stem(display_stem)
+        authors, journal, year = cite_from_filename(path.name)
+        rel = "examplePapers/" + path.name
+        year_name = str(year) if year else "Undated"
+        journal_name = journal or "Unknown"
+        tags = [
+            {"name": "Year", "path": "year", "parent": None, "group": True},
+            {"name": year_name, "path": "year/" + (str(year) if year else "undated"), "parent": "year", "group": False},
+            {"name": "Journal", "path": "journal", "parent": None, "group": True},
+            {
+                "name": journal_name,
+                "path": "journal/" + journal_name.replace("/", "-"),
+                "parent": "journal",
+                "group": False,
+            },
+        ]
+        for tag in tags:
+            touch(tag["name"], tag["path"], tag["parent"], tag["group"])
+        papers.append(
+            {
+                "id": paper_id,
+                "filename": path.name,
+                "title": title,
+                "relpath": rel,
+                "path": rel,
+                "href": rel,
+                "ext": path.suffix.lower(),
+                "size": stat.st_size,
+                "mtime": stat.st_mtime,
+                "pages": pages,
+                "year": year,
+                "authors": "; ".join(authors) if authors else "",
+                "journal": journal or "",
+                "folder": "examplePapers",
+                "map_tags": ["examplePapers"],
+                "tags": tags,
+                "preview": True,
+            }
+        )
+    return {
+        "count": len(papers),
+        "indexed_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "source": "examplePapers",
+        "tags": sorted(tag_rows.values(), key=lambda tag: (tag["path"].count("/"), tag["name"].lower())),
+        "papers": papers,
     }
 
 
@@ -917,6 +1048,23 @@ def paper_path(paper_id: int) -> Path | None:
     return path
 
 
+def static_file(url_path: str) -> Path | None:
+    """A repo file GitHub Pages can serve, limited to the demo catalogue."""
+    rel = url_path.lstrip("/")
+    if not rel or any(part.startswith(".") or part == ".." for part in Path(rel).parts):
+        return None
+    allowed = rel in STATIC_FILES or (rel.startswith("examplePapers/") and Path(rel).suffix.lower() in INCLUDE)
+    if not allowed:
+        return None
+    root = HERE.resolve()
+    target = (HERE / rel).resolve()
+    if target != root and root not in target.parents:
+        return None
+    if not target.is_file():
+        return None
+    return target
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "PaperDB/1.0"
 
@@ -929,6 +1077,10 @@ class Handler(BaseHTTPRequestHandler):
         path = unquote(parsed.path)
         if path.startswith("/file/"):
             self._file(path[6:])
+            return
+        found = static_file(path)
+        if found is not None:
+            self._send_file(found)
             return
         self.send_error(501)
 
@@ -959,6 +1111,10 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path.startswith("/file/"):
             self._file(path[6:])
+            return
+        found = static_file(path)
+        if found is not None:
+            self._send_file(found)
             return
         self.send_error(404)
 
@@ -1000,6 +1156,9 @@ class Handler(BaseHTTPRequestHandler):
         if path is None:
             self.send_error(404, "File is missing. Rebuild the index.")
             return
+        self._send_file(path)
+
+    def _send_file(self, path: Path) -> None:
         ctype = CONTENT_TYPES.get(path.suffix.lower(), "application/octet-stream")
         try:
             size = path.stat().st_size
